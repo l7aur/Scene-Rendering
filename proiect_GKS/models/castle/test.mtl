@@ -1,0 +1,107 @@
+# Blender 4.2.0 MTL File: 'test.blend'
+# www.blender.org
+
+newmtl Metal
+Ns 365.475220
+Ka 0.922727 0.922727 0.922727
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd metal_normal.jpg
+
+newmtl Metal1
+Ns 250.000000
+Ka 0.726562 0.726562 0.726562
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd metal_normal.jpg
+
+newmtl Metal2
+Ns 250.000000
+Ka 0.540199 0.540199 0.540199
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd metal_normal.jpg
+
+newmtl bl
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd black.jpg
+
+newmtl door
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd weathered_brown_planks_diff_4k.jpg
+map_Bump -bm 1.000000 weathered_brown_planks_nor_gl_4k.exr
+
+newmtl door_stone
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd stone_wall_02_diff_4k.jpg
+map_Ns rough_block_wall_rough_4k.jpg
+map_Bump -bm 1.000000 stone_wall_02_nor_gl_4k.exr
+
+newmtl light.001
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd lightt.jpg
+map_Ns light_rough.jpg
+
+
+newmtl roof
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd weathered_brown_planks_diff_4k.jpg
+map_Bump -bm 1.000000 weathered_brown_planks_nor_gl_4k.exr
+
+newmtl stairs
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.076408 0.033811 0.003430
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl wall
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd rough_block_wall_diff_4k.jpg
+map_Ns rough_block_wall_rough_4k.jpg
+map_Bump -bm 1.000000 rough_block_wall_nor_gl_4k.exr

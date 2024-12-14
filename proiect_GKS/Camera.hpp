@@ -31,9 +31,9 @@ namespace gps {
         float pitch{ 0.0f };
         float yaw{ -90.0f };
         const float sensivity{ 0.1f };
-        const float cameraSpeed{ 10.0f };
+        const float cameraSpeed{ 100.0f };
         const float nearPlane{ 0.1f };
-        const float farPlane{ 1000.0f };
+        const float farPlane{ 100.0f };
         glm::vec3 cameraPosition;
         glm::vec3 cameraTarget;
         glm::vec3 cameraFrontDirection;

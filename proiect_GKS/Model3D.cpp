@@ -105,7 +105,6 @@ namespace gps {
 			size_t a = shapes[s].mesh.material_ids.size();
 
 			if (a > 0 && materials.size()>0) {
-
 				materialId = shapes[s].mesh.material_ids[0];
 				if (materialId != -1) {
 
