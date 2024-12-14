@@ -20,6 +20,11 @@ static void initOpenGLState() {
 void static initModels() {
 	watchHouse.LoadModel("models/watchtower/wooden_watch_tower2.obj");
 	castle.LoadModel("models/castle/test.obj");
+	tv.LoadModel("models/tv/tv.obj");
+
+	myObjects.push_back(Object(&watchHouse, &myBasicShader, { 150, 0, 150 }));
+	myObjects.push_back(Object(&castle, &myBasicShader));
+	myObjects.push_back(Object(&tv, &myBasicShader, {50, 0, 50}));
 }
 
 void static initShaders() {

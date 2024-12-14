@@ -21,6 +21,30 @@
 #include <iostream>
 
 
+struct Object {
+    gps::Model3D* mesh;
+    gps::Shader* shader;
+    glm::vec3 translation{ glm::vec3(0.0f) };
+    glm::vec3 rotation{ glm::vec3(0.0f) };
+    glm::vec3 scale{ glm::vec3(1.0f) };
+    Object(gps::Model3D* m, gps::Shader* sh, glm::vec3 t, glm::vec3 r, glm::vec3 s) :
+        mesh(m), shader(sh), translation(t), rotation(r), scale(s)
+    {
+    };
+    Object(gps::Model3D* m, gps::Shader* sh, glm::vec3 t, glm::vec3 r):
+        mesh(m), shader(sh), translation(t), rotation(r)
+    {
+    };
+    Object(gps::Model3D* m, gps::Shader* sh, glm::vec3 t) :
+        mesh(m), shader(sh), translation(t)
+    {
+    };
+    Object(gps::Model3D* m, gps::Shader* sh) :
+        mesh(m), shader(sh)
+    {
+    };
+};
+
 // window
 gps::Window myWindow;
 
@@ -52,8 +76,10 @@ gps::Camera myCamera(
 );
 
 // models
+std::vector<Object> myObjects;
 gps::Model3D castle;
 gps::Model3D watchHouse;
+gps::Model3D tv;
 GLfloat angle{ 0.0f };
 
 // shaders

@@ -3,28 +3,28 @@
 #include "RenderObjects.hpp"
 #include "Callbacks.hpp"
 
-static GLenum glCheckError_(const char *file, int line)
+static GLenum glCheckError_(const char* file, int line)
 {
 	GLenum errorCode;
 	while ((errorCode = glGetError()) != GL_NO_ERROR) {
 		std::string error;
 		switch (errorCode) {
-            case GL_INVALID_ENUM:
-                error = "INVALID_ENUM";
-                break;
-            case GL_INVALID_VALUE:
-                error = "INVALID_VALUE";
-                break;
-            case GL_INVALID_OPERATION:
-                error = "INVALID_OPERATION";
-                break;
-            case GL_OUT_OF_MEMORY:
-                error = "OUT_OF_MEMORY";
-                break;
-            case GL_INVALID_FRAMEBUFFER_OPERATION:
-                error = "INVALID_FRAMEBUFFER_OPERATION";
-                break;
-        }
+		case GL_INVALID_ENUM:
+			error = "INVALID_ENUM";
+			break;
+		case GL_INVALID_VALUE:
+			error = "INVALID_VALUE";
+			break;
+		case GL_INVALID_OPERATION:
+			error = "INVALID_OPERATION";
+			break;
+		case GL_OUT_OF_MEMORY:
+			error = "OUT_OF_MEMORY";
+			break;
+		case GL_INVALID_FRAMEBUFFER_OPERATION:
+			error = "INVALID_FRAMEBUFFER_OPERATION";
+			break;
+		}
 		std::cout << error << " | " << file << " (" << line << ")" << std::endl;
 	}
 	return errorCode;
@@ -52,29 +52,29 @@ void static renderScene() {
 	projectionLoc = glGetUniformLocation(myBasicShader.shaderProgram, "projection");
 	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-	renderCastle(myBasicShader);
-	renderWatchHouse(myBasicShader);
+	for(Object& i : myObjects)
+		renderObject(i);
 }
 
 void static cleanup() {
-    myWindow.Delete();
-    //cleanup code for your own data
+	myWindow.Delete();
 }
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
 
-    try {
-        initOpenGLWindow();
-    } catch (const std::exception& e) {
-        std::cerr << e.what() << std::endl;
-        return EXIT_FAILURE;
-    }
+	try {
+		initOpenGLWindow();
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+		return EXIT_FAILURE;
+	}
 
-    initOpenGLState();
+	initOpenGLState();
 	initModels();
 	initShaders();
 	initUniforms();
-    setWindowCallbacks();
+	setWindowCallbacks();
 
 	glCheckError();
 	// application loop
@@ -90,5 +90,5 @@ int main(int argc, const char * argv[]) {
 	}
 
 	cleanup();
-    return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }
