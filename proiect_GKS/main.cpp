@@ -1,7 +1,37 @@
-#include "Declarations.hpp"
-#include "Inits.hpp"
-#include "RenderObjects.hpp"
-#include "Callbacks.hpp"
+#include "Object.hpp"
+#include "SceneRenderer.hpp"
+
+const float ROTATION_FACTOR{ 400.0f };
+const float CAMERA_SPEED{ 2.0f };
+GLfloat angle{ 0.0f };
+SceneRenderer myScene{};
+float currentFrameTime{ 0.0f };
+float previousFrameTime{ 0.0f };
+float deltaTime{ 0.0f };
+
+void windowResizeCallback(GLFWwindow* window, int width, int height) {
+	fprintf(stdout, "Window resized! New width: %d , and height: %d\n", width, height);
+	glViewport(0, 0, width, height);
+}
+
+void keyboardCallback(GLFWwindow* window, int key, int scancode, int action, int mode) {
+
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GLFW_TRUE);
+	if (key == GLFW_KEY_E && (action == GLFW_PRESS || action == GLFW_REPEAT))
+		angle += ROTATION_FACTOR * deltaTime;
+	if (key == GLFW_KEY_Q && (action == GLFW_PRESS || action == GLFW_REPEAT))
+		angle -= ROTATION_FACTOR * deltaTime;
+	myScene.getMyCamera()->keyboardCallback(deltaTime, window, key, scancode, action, mode);
+}
+
+void mouseCallback(GLFWwindow* window, double xPos, double yPos) {
+	myScene.getMyCamera()->mouseCallback(window, xPos, yPos);
+}
+
+void scrollCallback(GLFWwindow* window, double xOffset, double yOffset) {
+	myScene.getMyCamera()->scrollCallback(window, xOffset, yOffset);
+}
 
 static GLenum glCheckError_(const char* file, int line)
 {
@@ -31,64 +61,32 @@ static GLenum glCheckError_(const char* file, int line)
 }
 #define glCheckError() glCheckError_(__FILE__, __LINE__)
 
-void static renderScene() {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+gps::Model3D grass; //test
 
-	//render the scene
-
-	model = glm::mat4(1.0f);
-	modelLoc = glGetUniformLocation(myBasicShader.shaderProgram, "model");
-
-	myBasicShader.useShaderProgram();
-
-	glm::mat4 view = myCamera.getViewMatrix();
-	GLint viewLoc = glGetUniformLocation(myBasicShader.shaderProgram, "view");
-	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-
-	model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
-	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-	projection = myCamera.getProjectionMatrix(static_cast<float>(myWindow.getWindowDimensions().width) / static_cast<float>(myWindow.getWindowDimensions().height));
-	projectionLoc = glGetUniformLocation(myBasicShader.shaderProgram, "projection");
-	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
-
-	for(Object& i : myObjects)
-		renderObject(i);
-}
-
-void static cleanup() {
-	myWindow.Delete();
-}
+/* 
+* create a container class for all model3d and pass references in objects
+* refactor camera to support rotation + move callbacks into a header file
+*/
 
 int main(int argc, const char* argv[]) {
+	myScene.setWindowCallbacks(windowResizeCallback, keyboardCallback, mouseCallback, scrollCallback);
+	
+	grass.LoadModel("models/others/grass/grass.obj");
 
-	try {
-		initOpenGLWindow();
-	}
-	catch (const std::exception& e) {
-		std::cerr << e.what() << std::endl;
-		return EXIT_FAILURE;
-	}
+	myScene.insertIntoScene(Object(&grass, myScene.getBasicShader()));
 
-	initOpenGLState();
-	initModels();
-	initShaders();
-	initUniforms();
-	setWindowCallbacks();
-
+	//initModels(); //separate
 	glCheckError();
 	// application loop
-	while (!glfwWindowShouldClose(myWindow.getWindow())) {
+	while (!glfwWindowShouldClose(myScene.getMyWindow().getWindow())) {
 		currentFrameTime = static_cast<float>(glfwGetTime());
 		deltaTime = currentFrameTime - previousFrameTime;
-		renderScene();
+		myScene.renderScene();
 
 		glfwPollEvents();
-		glfwSwapBuffers(myWindow.getWindow());
+		glfwSwapBuffers(myScene.getMyWindow().getWindow());
 		glCheckError();
 		previousFrameTime = currentFrameTime;
 	}
-
-	cleanup();
 	return EXIT_SUCCESS;
 }
