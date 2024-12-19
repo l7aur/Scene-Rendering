@@ -1,4 +1,6 @@
 #include "Object.hpp"
+#include "ModelContainer.hpp"
+#include "Util.hpp"
 #include "SceneRenderer.hpp"
 
 const float ROTATION_FACTOR{ 400.0f };
@@ -8,30 +10,6 @@ SceneRenderer myScene{};
 float currentFrameTime{ 0.0f };
 float previousFrameTime{ 0.0f };
 float deltaTime{ 0.0f };
-
-void windowResizeCallback(GLFWwindow* window, int width, int height) {
-	fprintf(stdout, "Window resized! New width: %d , and height: %d\n", width, height);
-	glViewport(0, 0, width, height);
-}
-
-void keyboardCallback(GLFWwindow* window, int key, int scancode, int action, int mode) {
-
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GLFW_TRUE);
-	if (key == GLFW_KEY_E && (action == GLFW_PRESS || action == GLFW_REPEAT))
-		angle += ROTATION_FACTOR * deltaTime;
-	if (key == GLFW_KEY_Q && (action == GLFW_PRESS || action == GLFW_REPEAT))
-		angle -= ROTATION_FACTOR * deltaTime;
-	myScene.getMyCamera()->keyboardCallback(deltaTime, window, key, scancode, action, mode);
-}
-
-void mouseCallback(GLFWwindow* window, double xPos, double yPos) {
-	myScene.getMyCamera()->mouseCallback(window, xPos, yPos);
-}
-
-void scrollCallback(GLFWwindow* window, double xOffset, double yOffset) {
-	myScene.getMyCamera()->scrollCallback(window, xOffset, yOffset);
-}
 
 static GLenum glCheckError_(const char* file, int line)
 {
@@ -61,23 +39,17 @@ static GLenum glCheckError_(const char* file, int line)
 }
 #define glCheckError() glCheckError_(__FILE__, __LINE__)
 
-gps::Model3D grass; //test
-
-/* 
-* create a container class for all model3d and pass references in objects
-* refactor camera to support rotation + move callbacks into a header file
-*/
-
 int main(int argc, const char* argv[]) {
-	myScene.setWindowCallbacks(windowResizeCallback, keyboardCallback, mouseCallback, scrollCallback);
+	myScene.setWindowCallbacks(
+		Util::windowResizeCallback, 
+		Util::keyboardCallback, 
+		Util::mouseCallback, 
+		Util::scrollCallback);
 	
-	grass.LoadModel("models/others/grass/grass.obj");
+	ModelContainer::Others otherModels;
+	myScene.insertIntoScene(Object(&otherModels.grass, myScene.getBasicShader()));
 
-	myScene.insertIntoScene(Object(&grass, myScene.getBasicShader()));
-
-	//initModels(); //separate
 	glCheckError();
-	// application loop
 	while (!glfwWindowShouldClose(myScene.getMyWindow().getWindow())) {
 		currentFrameTime = static_cast<float>(glfwGetTime());
 		deltaTime = currentFrameTime - previousFrameTime;

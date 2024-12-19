@@ -27,10 +27,12 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="tiny_obj_loader.cpp" />
+    <ClCompile Include="Util.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.hpp" />
+    <ClInclude Include="ModelContainer.hpp" />
     <ClInclude Include="Inits.hpp" />
     <ClInclude Include="Mesh.hpp" />
     <ClInclude Include="Model3D.hpp" />
@@ -39,6 +41,7 @@
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="tiny_obj_loader.h" />
+    <ClInclude Include="Util.hpp" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
