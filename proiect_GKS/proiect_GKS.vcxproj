@@ -33,12 +33,12 @@
   <ItemGroup>
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="ModelContainer.hpp" />
-    <ClInclude Include="Inits.hpp" />
     <ClInclude Include="Mesh.hpp" />
     <ClInclude Include="Model3D.hpp" />
     <ClInclude Include="Object.hpp" />
     <ClInclude Include="SceneRenderer.hpp" />
     <ClInclude Include="Shader.hpp" />
+    <ClInclude Include="SmallHouse.hpp" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="tiny_obj_loader.h" />
     <ClInclude Include="Util.hpp" />

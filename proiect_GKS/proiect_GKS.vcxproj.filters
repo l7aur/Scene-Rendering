@@ -68,9 +68,6 @@
     <ClInclude Include="Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inits.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SceneRenderer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -81,6 +78,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Util.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallHouse.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

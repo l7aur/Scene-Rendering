@@ -11,8 +11,6 @@ SceneRenderer::SceneRenderer()
     );
     initOpenGLWindow();
     initOpenGLState();
-    initShaders();
-    initUniforms();
 }
 
 SceneRenderer::~SceneRenderer()
@@ -21,26 +19,26 @@ SceneRenderer::~SceneRenderer()
     myWindow.Delete();
 }
 
-void SceneRenderer::renderScene()
+void SceneRenderer::renderScene(gps::Shader& shader)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     //render the scene
 
     model = glm::mat4(1.0f);
-    modelLoc = glGetUniformLocation(myBasicShader.shaderProgram, "model");
+    modelLoc = glGetUniformLocation(shader.shaderProgram, "model");
 
-    myBasicShader.useShaderProgram();
+    shader.useShaderProgram();
 
     glm::mat4 view = myCamera->getViewMatrix();
-    GLint viewLoc = glGetUniformLocation(myBasicShader.shaderProgram, "view");
+    GLint viewLoc = glGetUniformLocation(shader.shaderProgram, "view");
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
     model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
     projection = myCamera->getProjectionMatrix(static_cast<float>(myWindow.getWindowDimensions().width) / static_cast<float>(myWindow.getWindowDimensions().height));
-    projectionLoc = glGetUniformLocation(myBasicShader.shaderProgram, "projection");
+    projectionLoc = glGetUniformLocation(shader.shaderProgram, "projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
     renderObjects();
@@ -71,46 +69,40 @@ void SceneRenderer::initOpenGLState()
     //glFrontFace(GL_CCW); // GL_CCW for counter clock-wise
 }
 
-void SceneRenderer::initShaders() {
-    myBasicShader.loadShader(
-        "shaders/basic.vert",
-        "shaders/basic.frag");
-}
-
-void SceneRenderer::initUniforms()
+void SceneRenderer::initUniforms(gps::Shader& shader)
 {
-    myBasicShader.useShaderProgram();
+    shader.useShaderProgram();
 
     // create model matrix for teapot
-    model = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
-    modelLoc = glGetUniformLocation(myBasicShader.shaderProgram, "model");
+    model = glm::mat4(1.0f);// glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
+    modelLoc = glGetUniformLocation(shader.shaderProgram, "model");
 
     // get view matrix for current camera
     view = myCamera->getViewMatrix();
-    viewLoc = glGetUniformLocation(myBasicShader.shaderProgram, "view");
+    viewLoc = glGetUniformLocation(shader.shaderProgram, "view");
     // send view matrix to shader
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
     // compute normal matrix for teapot
     normalMatrix = glm::mat3(glm::inverseTranspose(view * model));
-    normalMatrixLoc = glGetUniformLocation(myBasicShader.shaderProgram, "normalMatrix");
+    normalMatrixLoc = glGetUniformLocation(shader.shaderProgram, "normalMatrix");
 
     // create projection matrix
     float aspectRatio = static_cast<float>(myWindow.getWindowDimensions().width) / static_cast<float>(myWindow.getWindowDimensions().height);
     projection = myCamera->getProjectionMatrix(aspectRatio);
-    projectionLoc = glGetUniformLocation(myBasicShader.shaderProgram, "projection");
+    projectionLoc = glGetUniformLocation(shader.shaderProgram, "projection");
     // send projection matrix to shader
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
     //set the light direction (direction towards the light)
     lightDir = glm::vec3(0.0f, 1.0f, 1.0f);
-    lightDirLoc = glGetUniformLocation(myBasicShader.shaderProgram, "lightDir");
+    lightDirLoc = glGetUniformLocation(shader.shaderProgram, "lightDir");
     // send light dir to shader
     glUniform3fv(lightDirLoc, 1, glm::value_ptr(lightDir));
 
     //set light color
     lightColor = glm::vec3(1.0f, 1.0f, 1.0f); //white light
-    lightColorLoc = glGetUniformLocation(myBasicShader.shaderProgram, "lightColor");
+    lightColorLoc = glGetUniformLocation(shader.shaderProgram, "lightColor");
     // send light color to shader
     glUniform3fv(lightColorLoc, 1, glm::value_ptr(lightColor));
 }
@@ -134,7 +126,12 @@ void SceneRenderer::setWindowCallbacks(
     glfwSetScrollCallback(myWindow.getWindow(), scrollCallback);
 }
 
-void SceneRenderer::insertIntoScene(Object object)
+void SceneRenderer::insertIntoScene(const Object& object)
 {
     myObjects.push_back(object);
+}
+
+void SceneRenderer::insertIntoScene(const std::vector<Object>& objects)
+{
+    myObjects.insert(myObjects.end(), objects.begin(), objects.end());
 }

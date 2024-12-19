@@ -14,21 +14,22 @@ class SceneRenderer {
 public:
 	SceneRenderer();
 	~SceneRenderer();
-	void renderScene();
+	void initUniforms(gps::Shader& shader);
+	void renderScene(gps::Shader& shader);
 	void setWindowCallbacks(
 		void (*resizeCallback)(GLFWwindow*, int, int), 
 		void (*keyboardCallback)(GLFWwindow*, int, int, int, int), 
 		void (*mouseCallback)(GLFWwindow*, double, double),
 		void (*scrollCallback)(GLFWwindow*, double, double));
-	void insertIntoScene(Object object);
+	void insertIntoScene(const Object& object);
+	void insertIntoScene(const std::vector<Object>& objects);
 	gps::Window getMyWindow() const { return myWindow; };
 	gps::Camera* getMyCamera() const { return myCamera; };
-	gps::Shader getBasicShader() const { return myBasicShader; };
+	//gps::Shader getBasicShader() const { return myBasicShader; };
 private:
 	void initOpenGLWindow();
 	void initOpenGLState();
-	void initShaders();
-	void initUniforms();
+	//void initShaders();
 	void renderObjects();
 
 	gps::Window myWindow;
@@ -47,5 +48,5 @@ private:
 	GLfloat angle{ 0.0f };
 	gps::Camera* myCamera;
 	std::vector<Object> myObjects;
-	gps::Shader myBasicShader;
+	//gps::Shader myBasicShader;
 };

@@ -3,6 +3,8 @@
 #include "Model3D.hpp"
 
 namespace ModelContainer {
+	constexpr float yLevel = 1.0f;
+
 	struct Minecraft {
 		gps::Model3D spruceLog;
 		gps::Model3D cobblestone;
