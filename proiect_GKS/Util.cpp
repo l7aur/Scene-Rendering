@@ -9,10 +9,6 @@ void Util::keyboardCallback(GLFWwindow* window, int key, int scancode, int actio
 
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
-	if (key == GLFW_KEY_E && (action == GLFW_PRESS || action == GLFW_REPEAT))
-		angle += ROTATION_FACTOR * deltaTime;
-	if (key == GLFW_KEY_Q && (action == GLFW_PRESS || action == GLFW_REPEAT))
-		angle -= ROTATION_FACTOR * deltaTime;
 	myScene.getMyCamera()->keyboardCallback(deltaTime, window, key, scancode, action, mode);
 }
 

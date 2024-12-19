@@ -10,6 +10,7 @@
 namespace gps {
 
     enum MOVE_DIRECTION { MOVE_FORWARD, MOVE_BACKWARD, MOVE_RIGHT, MOVE_LEFT };
+    enum ROTATE_DIRECTION { LEFT, RIGHT };
 
     class Camera {
 
@@ -17,11 +18,13 @@ namespace gps {
         Camera(glm::vec3 cameraPosition, glm::vec3 cameraTarget, glm::vec3 cameraUp, const float nearZ, const float farZ);
         glm::mat4 getViewMatrix();
         void move(MOVE_DIRECTION direction, float deltaTime);
+        void rotate(ROTATE_DIRECTION direction, float deltaTime);
         void rotate(float pitch, float yaw);
         void mouseCallback(GLFWwindow* window, double xPos, double yPos);
         void keyboardCallback(float deltaTime, GLFWwindow* window, int key, int scancode, int action, int mode);
         void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
         glm::mat4 getProjectionMatrix(float aspectRatio);
+        GLfloat getModelAngle() const { return angle; };
 
     private:
         bool firstMouse{ true };
@@ -34,6 +37,8 @@ namespace gps {
         const float cameraSpeed{ 100.0f };
         const float nearPlane{ 0.1f };
         const float farPlane{ 100.0f };
+        const float rotationSpeed{ 1000.0f };
+        GLfloat angle{ 0.0f };
         glm::vec3 cameraPosition;
         glm::vec3 cameraTarget;
         glm::vec3 cameraFrontDirection;

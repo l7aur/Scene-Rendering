@@ -28,7 +28,7 @@ struct Object {
         mesh(m), shader(sh)
     {
     };
-    void render(GLint modelLoc, GLint normalMatrixLoc) {
+    void render(const GLint& modelLoc, const GLint& normalMatrixLoc) {
         shader.useShaderProgram();
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, translation);

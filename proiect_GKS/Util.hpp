@@ -3,9 +3,6 @@
 #include "Window.h"
 #include "SceneRenderer.hpp"
 
-extern const float ROTATION_FACTOR;
-extern const float CAMERA_SPEED;
-extern GLfloat angle;
 extern SceneRenderer myScene;
 extern float currentFrameTime;
 extern float previousFrameTime;

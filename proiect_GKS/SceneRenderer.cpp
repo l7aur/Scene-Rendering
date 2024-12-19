@@ -34,7 +34,7 @@ void SceneRenderer::renderScene(gps::Shader& shader)
     GLint viewLoc = glGetUniformLocation(shader.shaderProgram, "view");
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
-    model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
+    model = glm::rotate(model, glm::radians(myCamera->getModelAngle()), glm::vec3(0.0f, 1.0f, 0.0f));
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
     projection = myCamera->getProjectionMatrix(static_cast<float>(myWindow.getWindowDimensions().width) / static_cast<float>(myWindow.getWindowDimensions().height));

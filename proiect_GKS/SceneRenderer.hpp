@@ -45,8 +45,6 @@ private:
 	GLint normalMatrixLoc;
 	GLint lightDirLoc;
 	GLint lightColorLoc;
-	GLfloat angle{ 0.0f };
 	gps::Camera* myCamera;
 	std::vector<Object> myObjects;
-	//gps::Shader myBasicShader;
 };

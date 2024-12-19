@@ -27,6 +27,14 @@ namespace gps {
             cameraPosition += glm::normalize(glm::cross(cameraFrontDirection, cameraUpDirection)) * speed;
     }
 
+    void Camera::rotate(ROTATE_DIRECTION direction, float deltaTime)
+    {
+        if (direction == LEFT)
+            angle -= deltaTime * rotationSpeed;
+        if (direction == RIGHT)
+            angle += deltaTime * rotationSpeed;
+    }
+
     void Camera::rotate(float pitch, float yaw) {
         glm::vec3 direction(0.0f, 0.0f, 0.0f);
         direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
@@ -60,13 +68,17 @@ namespace gps {
     void Camera::keyboardCallback(float deltaTime, GLFWwindow* window, int key, int scancode, int action, int mode)
     {
         if (key == GLFW_KEY_W && (action == GLFW_PRESS || action == GLFW_REPEAT))
-            move(gps::MOVE_FORWARD, deltaTime);
+            move(gps::MOVE_DIRECTION::MOVE_FORWARD, deltaTime);
         if (key == GLFW_KEY_S && (action == GLFW_PRESS || action == GLFW_REPEAT))
-            move(gps::MOVE_BACKWARD, deltaTime);
+            move(gps::MOVE_DIRECTION::MOVE_BACKWARD, deltaTime);
         if (key == GLFW_KEY_A && (action == GLFW_PRESS || action == GLFW_REPEAT))
-            move(gps::MOVE_LEFT, deltaTime);
+            move(gps::MOVE_DIRECTION::MOVE_LEFT, deltaTime);
         if (key == GLFW_KEY_D && (action == GLFW_PRESS || action == GLFW_REPEAT))
-            move(gps::MOVE_RIGHT, deltaTime);
+            move(gps::MOVE_DIRECTION::MOVE_RIGHT, deltaTime);
+        if (key == GLFW_KEY_E && (action == GLFW_PRESS || action == GLFW_REPEAT))
+            rotate(gps::ROTATE_DIRECTION::RIGHT, deltaTime);
+        if (key == GLFW_KEY_Q && (action == GLFW_PRESS || action == GLFW_REPEAT))
+            rotate(gps::ROTATE_DIRECTION::LEFT, deltaTime);
     }
 
     void Camera::scrollCallback(GLFWwindow* window, double xOffset, double yOffset)
