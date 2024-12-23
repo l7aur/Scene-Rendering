@@ -30,14 +30,16 @@ int main(int argc, const char* argv[]) {
 	myScene.insertIntoScene(Object(&otherModels.grass, myBasicShader));
 	
 	/*test*/
-	//SmallHouseA h(myBasicShader);
-	//myScene.insertIntoScene(h.getVertices());
+	SmallHouseA h(myBasicShader);
+	myScene.insertIntoScene(h.getVertices());
 	//Church c(myBasicShader);
 	//myScene.insertIntoScene(c.getVertices());
 	//Well well(myBasicShader);
 	//myScene.insertIntoScene(well.getVertices());
-	BigHouseA t(myBasicShader);
-	myScene.insertIntoScene(t.getVertices());
+	//BigHouseA t(myBasicShader);
+	//TreeA t(myBasicShader);
+	//myScene.insertIntoScene(t.getVertices());
+	//myScene.insertIntoScene(t.getVertices());
 	/*test*/
 	
 	Util::glCheckError();

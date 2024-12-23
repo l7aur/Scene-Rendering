@@ -20,8 +20,10 @@ namespace ModelContainer {
 			cobblestone.LoadModel("models/cobblestone/cobblestone.obj");
 			glassBlock.LoadModel("models/glass_block/glass_block.obj");
 			sprucePlanks.LoadModel("models/wooden_spruce_planks/wooden_spruce_planks.obj");
-			/*DEBUG*/ fencePost = water = spruceStairsDefault = spruceStairsOutsideCorner = spruceLog;
-			/*DEBUG*/ leaves = cobblestone;
+			leaves.LoadModel("models/spruce_leaves/spruce_leaves.obj");
+			spruceStairsDefault.LoadModel("models/spruce_stairs_default/spruce_stairs_default.obj");
+			spruceStairsOutsideCorner.LoadModel("models/spruce_stairs_outside_corner/spruce_stairs_outside_corner.obj");
+			/*DEBUG*/ fencePost = water = spruceLog;
 			
 			// to be added
 			// fencePost.LoadModel("models/fence_post/fence_post.obj");
