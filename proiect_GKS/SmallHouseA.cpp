@@ -1,12 +1,12 @@
-#include "SmallHouse.hpp"
+#include "SmallHouseA.hpp"
 
-SmallHouse::SmallHouse(gps::Shader& myShader)
+SmallHouseA::SmallHouseA(gps::Shader& myShader)
 	: MinecraftBuilding(myShader)
 {
 	setup();
 }
 
-void SmallHouse::setup() {
+void SmallHouseA::setup() {
 	const float xCorner = 0.0f;
 	const float zCorner = -5.0f;
 
@@ -21,7 +21,7 @@ void SmallHouse::setup() {
 	buildSeventhLevel(xCoord, buildingStartingHeight + Displacement::Y * 6, zCoord);
 }
 
-void SmallHouse::buildFirstLevel(const float* xCoord, const float& y, const float* zCoord) {
+void SmallHouseA::buildFirstLevel(const float* xCoord, const float& y, const float* zCoord) {
 	addPillors(xCoord, y, zCoord);
 	for (int i = 1; i < 4; i++) {
 		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[i], y, zCoord[0] }, rotation, scale));
@@ -35,7 +35,7 @@ void SmallHouse::buildFirstLevel(const float* xCoord, const float& y, const floa
 			vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[i], y, zCoord[j] }, rotation, scale));
 }
 
-void SmallHouse::buildSecondLevel(const float* xCoord, const float& y, const float* zCoord) {
+void SmallHouseA::buildSecondLevel(const float* xCoord, const float& y, const float* zCoord) {
 	addPillors(xCoord, y, zCoord);
 	for (int i = 1; i < 4; i++) {
 		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[i], y, zCoord[4] }, rotation, scale));
@@ -46,7 +46,7 @@ void SmallHouse::buildSecondLevel(const float* xCoord, const float& y, const flo
 	vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[3], y, zCoord[0] }, rotation, scale));
 }
 
-void SmallHouse::buildThirdLevel(const float* xCoord, const float& y, const float* zCoord) {
+void SmallHouseA::buildThirdLevel(const float* xCoord, const float& y, const float* zCoord) {
 	addPillors(xCoord, y, zCoord);
 	glm::vec3 rotationLRWalls = rotation + glm::vec3{ 90.0f, 0.0f, 0.0f };
 	glm::vec3 rotationFWalls = rotation + glm::vec3{ 0.0f, 90.0f, 0.0f };
@@ -65,7 +65,7 @@ void SmallHouse::buildThirdLevel(const float* xCoord, const float& y, const floa
 	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[4], y, zCoord[2] }, rotation, scale));
 }
 
-void SmallHouse::buildFourthLevel(const float* xCoord, const float& y, const float* zCoord) {
+void SmallHouseA::buildFourthLevel(const float* xCoord, const float& y, const float* zCoord) {
 	addPillors(xCoord, y, zCoord);
 	for (int i = 1; i < 4; i++) {
 		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[i], y, zCoord[0] }, rotation, scale));
@@ -75,7 +75,7 @@ void SmallHouse::buildFourthLevel(const float* xCoord, const float& y, const flo
 	}
 }
 
-void SmallHouse::buildFifthLevel(const float* xCoord, const float& y, const float* zCoord) {
+void SmallHouseA::buildFifthLevel(const float* xCoord, const float& y, const float* zCoord) {
 	for (int i = 0; i < 5; i++) {
 		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[i], y, zCoord[0] }, rotation, scale));
 		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[i], y, zCoord[4] }, rotation, scale));
@@ -83,11 +83,22 @@ void SmallHouse::buildFifthLevel(const float* xCoord, const float& y, const floa
 	for (int i = 1; i < 4; i++) {
 		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[0], y, zCoord[i] }, rotation, scale));
 		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[4], y, zCoord[i] }, rotation, scale));
-
 	}
+	for (int i = 0; i < 5; i++) {
+		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[0] - Displacement::X, y, zCoord[i] }, rotation, scale));
+		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[4] + Displacement::X, y, zCoord[i] }, rotation, scale));
+	}
+	for (int i = 0; i < 5; i++) {
+		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[i], y, zCoord[0] - Displacement::Z }, rotation, scale));
+		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[i], y, zCoord[4] + Displacement::Z}, rotation, scale));
+	}
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[0] - Displacement::X, y, zCoord[4] + Displacement::Z}, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[4] + Displacement::X, y, zCoord[4] + Displacement::Z}, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[0] - Displacement::X, y, zCoord[0] - Displacement::Z}, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[4] + Displacement::X, y, zCoord[0] - Displacement::Z}, rotation, scale));
 }
 
-void SmallHouse::buildSixthLevel(const float* xCoord, const float& y, const float* zCoord)
+void SmallHouseA::buildSixthLevel(const float* xCoord, const float& y, const float* zCoord)
 {
 	for (int i = 1; i < 4; i++) {
 		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[3], y, zCoord[i] }, rotation, scale));
@@ -95,14 +106,38 @@ void SmallHouse::buildSixthLevel(const float* xCoord, const float& y, const floa
 	}
 	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[2], y, zCoord[3] }, rotation, scale));
 	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[2], y, zCoord[1] }, rotation, scale));
+	for (int i = 0; i < 5; i++) {
+		if (i == 0 || i == 4)
+			continue;
+		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[0], y, zCoord[i] }, rotation, scale));
+		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[4], y, zCoord[i] }, rotation, scale));
+	}
+	for (int i = 0; i < 5; i++) {
+		if (i == 0 || i == 4)
+			continue;
+		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[i], y, zCoord[0] }, rotation, scale));
+		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[i], y, zCoord[4] }, rotation, scale));
+	}
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[0], y, zCoord[4] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[4], y, zCoord[4] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[0], y, zCoord[0] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[4], y, zCoord[0] }, rotation, scale));
 }
 
-void SmallHouse::buildSeventhLevel(const float* xCoord, const float& y, const float* zCoord)
+void SmallHouseA::buildSeventhLevel(const float* xCoord, const float& y, const float* zCoord)
 {
 	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[2], y, zCoord[2] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[1], y, zCoord[2] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[3], y, zCoord[2] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[2], y, zCoord[1] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[2], y, zCoord[3] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[1], y, zCoord[3] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[3], y, zCoord[3] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[1], y, zCoord[1] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[3], y, zCoord[1] }, rotation, scale));
 }
 
-void SmallHouse::addPillors(const float* xCoord, const float& y, const float* zCoord) {
+void SmallHouseA::addPillors(const float* xCoord, const float& y, const float* zCoord) {
 	vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[0], y, zCoord[0] }, rotation, scale));
 	vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[4], y, zCoord[4] }, rotation, scale));
 	vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[4], y, zCoord[0] }, rotation, scale));

@@ -12,13 +12,16 @@ namespace ModelContainer {
 		gps::Model3D glassBlock;
 		gps::Model3D fencePost;
 		gps::Model3D water;
-		gps::Model3D spruceStairs;
+		gps::Model3D spruceStairsDefault;
+		gps::Model3D spruceStairsOutsideCorner;
+		gps::Model3D leaves;
 		Minecraft() {
 			spruceLog.LoadModel("models/spruce_log/spruce_log.obj");
 			cobblestone.LoadModel("models/cobblestone/cobblestone.obj");
 			glassBlock.LoadModel("models/glass_block/glass_block.obj");
 			sprucePlanks.LoadModel("models/wooden_spruce_planks/wooden_spruce_planks.obj");
-			/*DEBUG*/ fencePost = water = spruceStairs = spruceLog;
+			/*DEBUG*/ fencePost = water = spruceStairsDefault = spruceStairsOutsideCorner = spruceLog;
+			/*DEBUG*/ leaves = cobblestone;
 			
 			// to be added
 			// fencePost.LoadModel("models/fence_post/fence_post.obj");

@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BigHouseA.cpp" />
+    <ClCompile Include="BigHouseA.hpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Church.cpp" />
     <ClCompile Include="main.cpp" />
@@ -27,9 +29,12 @@
     <ClCompile Include="Model3D.cpp" />
     <ClCompile Include="SceneRenderer.cpp" />
     <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="SmallHouse.cpp" />
+    <ClCompile Include="SmallHouseA.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="tiny_obj_loader.cpp" />
+    <ClCompile Include="TreeA.cpp" />
+    <ClCompile Include="TreeB.cpp" />
+    <ClCompile Include="TreeB.hpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="Well.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -44,9 +49,10 @@
     <ClInclude Include="Object.hpp" />
     <ClInclude Include="SceneRenderer.hpp" />
     <ClInclude Include="Shader.hpp" />
-    <ClInclude Include="SmallHouse.hpp" />
+    <ClInclude Include="SmallHouseA.hpp" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="tiny_obj_loader.h" />
+    <ClInclude Include="TreeA.hpp" />
     <ClInclude Include="Util.hpp" />
     <ClInclude Include="Well.hpp" />
     <ClInclude Include="Window.h" />

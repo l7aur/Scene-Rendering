@@ -45,7 +45,7 @@
     <ClCompile Include="Util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SmallHouse.cpp">
+    <ClCompile Include="SmallHouseA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Church.cpp">
@@ -55,6 +55,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Well.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeB.hpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BigHouseA.hpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BigHouseA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,7 +107,7 @@
     <ClInclude Include="Util.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SmallHouse.hpp">
+    <ClInclude Include="SmallHouseA.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Church.hpp">
@@ -102,6 +117,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Well.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeA.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

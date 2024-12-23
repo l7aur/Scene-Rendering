@@ -1,7 +1,10 @@
 #include "Util.hpp"
-#include "SmallHouse.hpp"
+#include "SmallHouseA.hpp"
+#include "BigHouseA.hpp"
 #include "Church.hpp"
 #include "Well.hpp"
+#include "TreeA.hpp"
+#include "TreeB.hpp"
 
 const float ROTATION_FACTOR{ 400.0f };
 const float CAMERA_SPEED{ 2.0f };
@@ -27,12 +30,14 @@ int main(int argc, const char* argv[]) {
 	myScene.insertIntoScene(Object(&otherModels.grass, myBasicShader));
 	
 	/*test*/
-	SmallHouse h(myBasicShader);
-	myScene.insertIntoScene(h.getVertices());
+	//SmallHouseA h(myBasicShader);
+	//myScene.insertIntoScene(h.getVertices());
 	//Church c(myBasicShader);
 	//myScene.insertIntoScene(c.getVertices());
 	//Well well(myBasicShader);
 	//myScene.insertIntoScene(well.getVertices());
+	BigHouseA t(myBasicShader);
+	myScene.insertIntoScene(t.getVertices());
 	/*test*/
 	
 	Util::glCheckError();
