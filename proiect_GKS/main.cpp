@@ -1,8 +1,7 @@
-#include "Object.hpp"
-#include "ModelContainer.hpp"
 #include "Util.hpp"
-#include "SceneRenderer.hpp"
 #include "SmallHouse.hpp"
+#include "Church.hpp"
+#include "Well.hpp"
 
 const float ROTATION_FACTOR{ 400.0f };
 const float CAMERA_SPEED{ 2.0f };
@@ -22,14 +21,18 @@ int main(int argc, const char* argv[]) {
 	myScene.setWindowCallbacks(
 		Util::windowResizeCallback, 
 		Util::keyboardCallback, 
-		Util::mouseCallback, 
+		Util::mouseCallback,
 		Util::scrollCallback);
 	
 	myScene.insertIntoScene(Object(&otherModels.grass, myBasicShader));
 	
 	/*test*/
 	SmallHouse h(myBasicShader);
-	myScene.insertIntoScene(h.vertices);
+	myScene.insertIntoScene(h.getVertices());
+	//Church c(myBasicShader);
+	//myScene.insertIntoScene(c.getVertices());
+	//Well well(myBasicShader);
+	//myScene.insertIntoScene(well.getVertices());
 	/*test*/
 	
 	Util::glCheckError();
