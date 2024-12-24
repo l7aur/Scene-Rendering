@@ -15,6 +15,7 @@ namespace ModelContainer {
 		gps::Model3D spruceStairsDefault;
 		gps::Model3D spruceStairsOutsideCorner;
 		gps::Model3D leaves;
+		gps::Model3D door;
 		Minecraft() {
 			spruceLog.LoadModel("models/spruce_log/spruce_log.obj");
 			cobblestone.LoadModel("models/cobblestone/cobblestone.obj");
@@ -23,6 +24,7 @@ namespace ModelContainer {
 			leaves.LoadModel("models/spruce_leaves/spruce_leaves.obj");
 			spruceStairsDefault.LoadModel("models/spruce_stairs_default/spruce_stairs_default.obj");
 			spruceStairsOutsideCorner.LoadModel("models/spruce_stairs_outside_corner/spruce_stairs_outside_corner.obj");
+			door.LoadModel("models/spruce_door/spruce_door.obj");
 			/*DEBUG*/ fencePost = water = spruceLog;
 			
 			// to be added

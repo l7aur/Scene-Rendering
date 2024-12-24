@@ -14,5 +14,9 @@ private:
 	virtual void buildFifthLevel(const float* xCoord, const float& y, const float* zCoord) override;
 	virtual void buildSixthLevel(const float* xCoord, const float& y, const float* zCoord) override;
 	virtual void buildSeventhLevel(const float* xCoord, const float& y, const float* zCoord) override;
+	virtual void buildEigthLevel(const float* xCoord, const float& y, const float* zCoord) override;
+	virtual void buildNinthLevel(const float* xCoord, const float& y, const float* zCoord) override;
+	virtual void buildTenthLevel(const float* xCoord, const float& y, const float* zCoord) override;
+	virtual void buildEleventhLevel(const float* xCoord, const float& y, const float* zCoord) override;
 	void addPillors(const float* xCoord, const float& y, const float* zCoord);
 };

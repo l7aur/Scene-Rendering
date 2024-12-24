@@ -30,7 +30,7 @@ int main(int argc, const char* argv[]) {
 	myScene.insertIntoScene(Object(&otherModels.grass, myBasicShader));
 	
 	/*test*/
-	SmallHouseA h(myBasicShader);
+	BigHouseA h(myBasicShader);
 	myScene.insertIntoScene(h.getVertices());
 	//Church c(myBasicShader);
 	//myScene.insertIntoScene(c.getVertices());

@@ -21,13 +21,24 @@ void BigHouseA::setup()
 	buildFifthLevel(xCoord, buildingStartingHeight + Displacement::Y * 4, zCoord);
 	buildSixthLevel(xCoord, buildingStartingHeight + Displacement::Y * 5, zCoord);
 	buildSeventhLevel(xCoord, buildingStartingHeight + Displacement::Y * 6, zCoord);
+	buildEigthLevel(xCoord, buildingStartingHeight + Displacement::Y * 7, zCoord);
+	buildNinthLevel(xCoord, buildingStartingHeight + Displacement::Y * 8, zCoord);
+	buildTenthLevel(xCoord, buildingStartingHeight + Displacement::Y * 9, zCoord);
+	buildEleventhLevel(xCoord, buildingStartingHeight + Displacement::Y * 10, zCoord);
 }
 
 void BigHouseA::buildFirstLevel(const float* xCoord, const float& y, const float* zCoord)
 {
+	addPillors(xCoord, y, zCoord);
 	for (int i = 0; i < 9; i++)
-		for (int j = 0; j < 5; j++)
+		for (int j = 0; j < 5; j++) {
+			if (i == 0 && j == 0 ||
+				i == 8 && j == 0 ||
+				i == 0 && j == 4 ||
+				i == 8 && j == 4)
+				continue;
 			vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[i], y, zCoord[j] }, rotation, scale));
+		}
 }
 
 void BigHouseA::buildSecondLevel(const float* xCoord, const float& y, const float* zCoord)
@@ -44,6 +55,7 @@ void BigHouseA::buildSecondLevel(const float* xCoord, const float& y, const floa
 		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[8], y, zCoord[j] }, rotation, scale));
 	}
 	vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[3], y, zCoord[3] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.door, shader, { xCoord[4], y + 1.0f, zCoord[0] }, rotation, scale));
 	vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[4], y, zCoord[3] }, rotation, scale));
 }
 
@@ -125,6 +137,79 @@ void BigHouseA::buildSixthLevel(const float* xCoord, const float& y, const float
 
 void BigHouseA::buildSeventhLevel(const float* xCoord, const float& y, const float* zCoord)
 {
+	addPillors(xCoord, y, zCoord);
+	for (int i = 1; i < 8; i++) {
+		if (i == 2 || i == 4 || i == 6)
+			continue;
+		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[i], y, zCoord[0] }, rotation, scale));
+		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[i], y, zCoord[4] }, rotation, scale));
+	}
+	for (int j = 1; j < 4; j++) {
+		if (j == 2)
+			continue;
+		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[0], y, zCoord[j] }, rotation, scale));
+		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[8], y, zCoord[j] }, rotation, scale));
+	}
+	vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[4], y, zCoord[0] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[2], y, zCoord[0] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[4], y, zCoord[0] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[6], y, zCoord[0] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[2], y, zCoord[4] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[4], y, zCoord[4] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[6], y, zCoord[4] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[0], y, zCoord[2] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[8], y, zCoord[2] }, rotation, scale));
+}
+
+void BigHouseA::buildEigthLevel(const float* xCoord, const float& y, const float* zCoord)
+{
+	buildSixthLevel(xCoord, y, zCoord);
+	for (int i = 0; i < 9; i++) {
+		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[i], y, zCoord[0] - Displacement::Z }, rotation, scale));
+		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[i], y, zCoord[4] + Displacement::Z }, rotation, scale));
+	}
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[0] - Displacement::X, y, zCoord[4] + Displacement::Z }, rotation, scale));
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[8] + Displacement::X, y, zCoord[4] + Displacement::Z }, rotation, scale));
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[0] - Displacement::X, y, zCoord[0] - Displacement::Z }, rotation, scale));
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[8] + Displacement::X, y, zCoord[0] - Displacement::Z }, rotation, scale));
+}
+
+void BigHouseA::buildNinthLevel(const float* xCoord, const float& y, const float* zCoord)
+{
+	for (int i = 0; i < 9; i++) {
+		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[i], y, zCoord[0] }, rotation, scale));
+		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[i], y, zCoord[4] }, rotation, scale));
+	}
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[0] - Displacement::X, y, zCoord[4] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[8] + Displacement::X, y, zCoord[4] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[0] - Displacement::X, y, zCoord[0] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[8] + Displacement::X, y, zCoord[0] }, rotation, scale));
+	for (int j = 1; j < 4; j++) {
+		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[0], y, zCoord[j] }, rotation, scale));
+		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[8], y, zCoord[j] }, rotation, scale));
+	}
+}
+
+void BigHouseA::buildTenthLevel(const float* xCoord, const float& y, const float* zCoord)
+{
+	for (int i = 0; i < 9; i++) {
+		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[i], y, zCoord[1] }, rotation, scale));
+		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[i], y, zCoord[3] }, rotation, scale));
+	}
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[0] - Displacement::X, y, zCoord[3] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[8] + Displacement::X, y, zCoord[3] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[0] - Displacement::X, y, zCoord[1] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[8] + Displacement::X, y, zCoord[1] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[0], y, zCoord[2] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[8], y, zCoord[2] }, rotation, scale));
+}
+
+void BigHouseA::buildEleventhLevel(const float* xCoord, const float& y, const float* zCoord)
+{
+	for (int i = 0; i < 9; i++)
+		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[i], y, zCoord[2] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[0] - Displacement::X, y, zCoord[2] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[8] + Displacement::X, y, zCoord[2] }, rotation, scale));
 }
 
 void BigHouseA::addPillors(const float* xCoord, const float& y, const float* zCoord)
