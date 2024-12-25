@@ -1,7 +1,7 @@
 #include "Well.hpp"
 
-Well::Well(gps::Shader& myShader)
-	: MinecraftBuilding(myShader)
+Well::Well(gps::Shader& myShader, const float myCornerX, const float myCornerZ)
+	: MinecraftBuilding(myShader, myCornerX, myCornerZ)
 {
 	setup();
 }
@@ -10,8 +10,8 @@ void Well::setup()
 {
 	const float xCorner = 20.0f;
 	const float zCorner = 20.0f;
-	const float xCoord[] = { xCorner, xCorner + Displacement::X, xCorner + 2 * Displacement::X, xCorner + 3 * Displacement::X, xCorner + 4 * Displacement::X, xCorner + 5 * Displacement::X, xCorner + 6 * Displacement::X };
-	const float zCoord[] = { zCorner, zCorner + Displacement::Z, zCorner + 2 * Displacement::Z, zCorner + 3 * Displacement::Z, zCorner + 4 * Displacement::Z, zCorner + 5 * Displacement::Z, zCorner + 6 * Displacement::Z };
+	const float xCoord[] = { cornerX, cornerX + Displacement::X, cornerX + 2 * Displacement::X, cornerX + 3 * Displacement::X, cornerX + 4 * Displacement::X, cornerX + 5 * Displacement::X, cornerX + 6 * Displacement::X };
+	const float zCoord[] = { cornerZ, cornerZ + Displacement::Z, cornerZ + 2 * Displacement::Z, cornerZ + 3 * Displacement::Z, cornerZ + 4 * Displacement::Z, cornerZ + 5 * Displacement::Z, cornerZ + 6 * Displacement::Z };
 	buildFirstLevel(xCoord, buildingStartingHeight + Displacement::Y * 0, zCoord);
 	buildSecondLevel(xCoord, buildingStartingHeight + Displacement::Y * 1, zCoord);
 	buildThirdLevel(xCoord, buildingStartingHeight + Displacement::Y * 2, zCoord);

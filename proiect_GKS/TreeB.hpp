@@ -4,7 +4,7 @@
 
 class TreeB : public MinecraftBuilding {
 public:
-	TreeB(gps::Shader myShader);
+	TreeB(gps::Shader myShader, const float myCornerX, const float myCornerZ);
 private:
 	virtual void setup() override;
 	virtual void buildFirstLevel(const float* xCoord, const float& y, const float* zCoord) override;

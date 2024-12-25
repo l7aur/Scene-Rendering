@@ -3,8 +3,8 @@
 SceneRenderer::SceneRenderer()
 {
 	myCamera = new gps::Camera(
-        glm::vec3(0.0f, 5.0f, 3.0f),
-        glm::vec3(0.0f, 5.0f, -10.0f),
+        glm::vec3(0.0f, 3.0f, 0.0f),
+        glm::vec3(0.0f, 3.0f, -4.0f),
         glm::vec3(0.0f, 1.0f, 0.0f),
         0.1f,
         1000.0f
@@ -19,7 +19,7 @@ SceneRenderer::~SceneRenderer()
     myWindow.Delete();
 }
 
-void SceneRenderer::renderScene(gps::Shader& shader)
+void SceneRenderer::updateShaderMatrices(gps::Shader& shader)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -40,8 +40,6 @@ void SceneRenderer::renderScene(gps::Shader& shader)
     projection = myCamera->getProjectionMatrix(static_cast<float>(myWindow.getWindowDimensions().width) / static_cast<float>(myWindow.getWindowDimensions().height));
     projectionLoc = glGetUniformLocation(shader.shaderProgram, "projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
-
-    renderObjects();
 }
 
 void SceneRenderer::initOpenGLWindow()
@@ -62,8 +60,10 @@ void SceneRenderer::initOpenGLState()
     glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
     glViewport(0, 0, myWindow.getWindowDimensions().width, myWindow.getWindowDimensions().height);
     glEnable(GL_FRAMEBUFFER_SRGB);
+  //  glEnable(GL_BLEND);
     glEnable(GL_DEPTH_TEST); // enable depth-testing
     glDepthFunc(GL_LESS); // depth-testing interprets a smaller value as "closer"
+  //  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //glEnable(GL_CULL_FACE); // cull face
     //glCullFace(GL_BACK); // cull back face
     //glFrontFace(GL_CCW); // GL_CCW for counter clock-wise

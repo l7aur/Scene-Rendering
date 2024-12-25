@@ -15,7 +15,7 @@ public:
 	SceneRenderer();
 	~SceneRenderer();
 	void initUniforms(gps::Shader& shader);
-	void renderScene(gps::Shader& shader);
+	void updateShaderMatrices(gps::Shader& shader);
 	void setWindowCallbacks(
 		void (*resizeCallback)(GLFWwindow*, int, int), 
 		void (*keyboardCallback)(GLFWwindow*, int, int, int, int), 
@@ -25,12 +25,11 @@ public:
 	void insertIntoScene(const std::vector<Object>& objects);
 	gps::Window getMyWindow() const { return myWindow; };
 	gps::Camera* getMyCamera() const { return myCamera; };
-	//gps::Shader getBasicShader() const { return myBasicShader; };
+	const std::vector<Object> getObjects() const { return myObjects; };
+	void renderObjects();
 private:
 	void initOpenGLWindow();
 	void initOpenGLState();
-	//void initShaders();
-	void renderObjects();
 
 	gps::Window myWindow;
 	glm::mat4 model;

@@ -16,7 +16,7 @@ extern ModelContainer::Minecraft minecraft;
 
 class MinecraftBuilding {
 public:
-	MinecraftBuilding(gps::Shader& myShader);
+	MinecraftBuilding(gps::Shader& myShader, const float myCornerX, const float myCornerZ);
 	const std::vector<Object>& getVertices() const { return this->vertices; };
 
 protected:
@@ -24,6 +24,7 @@ protected:
 	std::vector<Object> vertices;
 	glm::vec3 rotation{ 90.0f, 0.0f, 0.0f };
 	glm::vec3 scale{ 1.0f, 1.0f, 1.0f };
+	const float cornerX{}, cornerZ{};
 	virtual void setup() = 0;
 	virtual void buildFirstLevel(const float* xCoord, const float& yCoord, const float* zCoord) {};
 	virtual void buildSecondLevel(const float* xCoord, const float& yCoord, const float* zCoord) {};

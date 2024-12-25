@@ -107,6 +107,15 @@ namespace gps {
 			if (a > 0 && materials.size()>0) {
 				materialId = shapes[s].mesh.material_ids[0];
 				if (materialId != -1) {
+		std::cout << materials[materialId].ior<< '\n';
+		for (int tt = 0; tt < 3; tt++)
+			std::cout << materials[materialId].diffuse[tt] << '\n';
+		for (int tt = 0; tt < 3; tt++)
+			std::cout << materials[materialId].ambient[tt] << '\n';
+		for (int tt = 0; tt < 3; tt++)
+			std::cout << materials[materialId].specular[tt] << '\n';
+		std::cout << materials[materialId].name << '\n';
+		std::cout << materials[materialId].shininess << '\n';
 
 					gps::Material currentMaterial;
 					currentMaterial.ambient = glm::vec3(materials[materialId].ambient[0], materials[materialId].ambient[1], materials[materialId].ambient[2]);
@@ -125,7 +134,7 @@ namespace gps {
 
 					//diffuse texture
 					std::string diffuseTexturePath = materials[materialId].diffuse_texname;
-
+		std::cout << diffuseTexturePath << "aaa\n";
 					if (!diffuseTexturePath.empty()) {
 
 						gps::Texture currentTexture;
@@ -135,6 +144,7 @@ namespace gps {
 
 					//specular texture
 					std::string specularTexturePath = materials[materialId].specular_texname;
+		std::cout << specularTexturePath << "aaa\n";
 
 					if (!specularTexturePath.empty()) {
 
@@ -144,7 +154,6 @@ namespace gps {
 					}
 				}
 			}
-
 			meshes.push_back(gps::Mesh(vertices, indices, textures));
 		}
 	}
@@ -216,7 +225,7 @@ namespace gps {
 		glTexImage2D(
 			GL_TEXTURE_2D,
 			0,
-			GL_SRGB, //GL_SRGB,//GL_RGBA,
+			GL_RGBA, //GL_SRGB,//GL_SRGB,
 			x,
 			y,
 			0,

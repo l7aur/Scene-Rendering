@@ -1,18 +1,15 @@
 #include "TreeB.hpp"
 
-TreeB::TreeB(gps::Shader myShader)
-	: MinecraftBuilding(myShader)
+TreeB::TreeB(gps::Shader myShader, const float myCornerX, const float myCornerZ)
+	: MinecraftBuilding(myShader, myCornerX, myCornerZ)
 {
 	setup();
 }
 
 void TreeB::setup()
 {
-	const float xCorner = -10.0f;
-	const float zCorner = -10.0f;
-
-	const float xCoord[] = { xCorner, xCorner + Displacement::X, xCorner + 2 * Displacement::X };
-	const float zCoord[] = { zCorner, zCorner + Displacement::Z, zCorner + 2 * Displacement::Z };
+	const float xCoord[] = { cornerX, cornerX+ Displacement::X, cornerX+ 2 * Displacement::X };
+	const float zCoord[] = { cornerZ, cornerZ + Displacement::Z, cornerZ + 2 * Displacement::Z };
 	buildFirstLevel(xCoord, buildingStartingHeight + Displacement::Y * 0, zCoord);
 	buildSecondLevel(xCoord, buildingStartingHeight + Displacement::Y * 1, zCoord);
 	buildThirdLevel(xCoord, buildingStartingHeight + Displacement::Y * 2, zCoord);

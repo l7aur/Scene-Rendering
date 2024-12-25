@@ -1,13 +1,5 @@
 #include "Util.hpp"
-#include "SmallHouseA.hpp"
-#include "BigHouseA.hpp"
-#include "Church.hpp"
-#include "Well.hpp"
-#include "TreeA.hpp"
-#include "TreeB.hpp"
 
-const float ROTATION_FACTOR{ 400.0f };
-const float CAMERA_SPEED{ 2.0f };
 GLfloat angle{ 0.0f };
 float currentFrameTime{ 0.0f };
 float previousFrameTime{ 0.0f };
@@ -17,36 +9,35 @@ ModelContainer::Others otherModels;
 ModelContainer::Minecraft minecraft;
 
 int main(int argc, const char* argv[]) {
-	gps::Shader myBasicShader{};
-	Util::initShader(myBasicShader);
+	/*gps::Shader myBasicShader{};
+	Util::initShader(myBasicShader, "shaders/basic.vert", "shaders/basic.frag");
+	myScene.initUniforms(myBasicShader);*/
 
-	myScene.initUniforms(myBasicShader);
+	gps::Shader testShader{};
+	Util::initShader(testShader, "shaders/test.vert", "shaders/test.frag");
+	myScene.initUniforms(testShader);
+
 	myScene.setWindowCallbacks(
-		Util::windowResizeCallback, 
-		Util::keyboardCallback, 
-		Util::mouseCallback,
-		Util::scrollCallback);
+		Util::windowResizeCallback, Util::keyboardCallback, 
+		Util::mouseCallback, Util::scrollCallback);
 	
-	myScene.insertIntoScene(Object(&otherModels.grass, myBasicShader));
+	//Util::buildScene(myBasicShader);
 	
-	/*test*/
-	BigHouseA h(myBasicShader);
-	myScene.insertIntoScene(h.getVertices());
-	//Church c(myBasicShader);
-	//myScene.insertIntoScene(c.getVertices());
-	//Well well(myBasicShader);
-	//myScene.insertIntoScene(well.getVertices());
-	//BigHouseA t(myBasicShader);
-	//TreeA t(myBasicShader);
-	//myScene.insertIntoScene(t.getVertices());
-	//myScene.insertIntoScene(t.getVertices());
-	/*test*/
+	//BigHouseA h(myBasicShader, 2, -3);
 	
+
+	myScene.insertIntoScene(Object(&otherModels.grass, testShader));
+	myScene.insertIntoScene(Object(&minecraft.glassBlock, testShader, {0.0f, 1.0f, -3.0f}));
+	
+	//Util::sortBlocks();
+
 	Util::glCheckError();
 	while (!glfwWindowShouldClose(myScene.getMyWindow().getWindow())) {
 		currentFrameTime = static_cast<float>(glfwGetTime());
 		deltaTime = currentFrameTime - previousFrameTime;
-		myScene.renderScene(myBasicShader);
+
+		myScene.updateShaderMatrices(testShader);
+		myScene.renderObjects();
 
 		glfwPollEvents();
 		glfwSwapBuffers(myScene.getMyWindow().getWindow());

@@ -1,17 +1,15 @@
 #include "SmallHouseA.hpp"
 
-SmallHouseA::SmallHouseA(gps::Shader& myShader)
-	: MinecraftBuilding(myShader)
+SmallHouseA::SmallHouseA(gps::Shader& myShader, const float myCornerX, const float myCornerZ)
+	: MinecraftBuilding(myShader, myCornerX, myCornerZ)
 {
 	setup();
 }
 
 void SmallHouseA::setup() {
-	const float xCorner = 0.0f;
-	const float zCorner = -5.0f;
 
-	const float xCoord[] = { xCorner, xCorner + Displacement::X, xCorner + 2 * Displacement::X, xCorner + 3 * Displacement::X, xCorner + 4 * Displacement::X };
-	const float zCoord[] = { zCorner, zCorner + Displacement::Z, zCorner + 2 * Displacement::Z, zCorner + 3 * Displacement::Z, zCorner + 4 * Displacement::Z }; 
+	const float xCoord[] = { cornerX, cornerX + Displacement::X, cornerX + 2 * Displacement::X, cornerX + 3 * Displacement::X, cornerX + 4 * Displacement::X };
+	const float zCoord[] = { cornerZ, cornerZ + Displacement::Z, cornerZ + 2 * Displacement::Z, cornerZ + 3 * Displacement::Z, cornerZ + 4 * Displacement::Z };
 	buildFirstLevel(xCoord, buildingStartingHeight, zCoord);
 	buildSecondLevel(xCoord, buildingStartingHeight + Displacement::Y, zCoord);
 	buildThirdLevel(xCoord, buildingStartingHeight + Displacement::Y * 2, zCoord);

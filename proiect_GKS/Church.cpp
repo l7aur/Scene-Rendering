@@ -1,17 +1,15 @@
 #include "Church.hpp"
 
-Church::Church(gps::Shader& myShader)
-	: MinecraftBuilding(myShader)
+Church::Church(gps::Shader& myShader, const float myCornerX, const float myCornerZ)
+	: MinecraftBuilding(myShader, myCornerX, myCornerX)
 {
 	setup();
 }
 
 void Church::setup() {
-	const float xCorner = -20.0f;
-	const float zCorner = -20.0f;
-	const float xCoord[] = { xCorner, xCorner + Displacement::X, xCorner + 2 * Displacement::X, xCorner + 3 * Displacement::X, xCorner + 4 * Displacement::X };
-	const float zCoord[] = { zCorner, zCorner + Displacement::Z, zCorner + 2 * Displacement::Z, zCorner + 3 * Displacement::Z, zCorner + 4 * Displacement::Z,
-		zCorner + Displacement::Z * 5, zCorner + Displacement::Z * 6, zCorner + Displacement::Z * 7, zCorner + Displacement::Z * 8 };
+	const float xCoord[] = { cornerX, cornerX + Displacement::X, cornerX + 2 * Displacement::X, cornerX + 3 * Displacement::X, cornerX + 4 * Displacement::X };
+	const float zCoord[] = { cornerZ, cornerZ + Displacement::Z, cornerZ + 2 * Displacement::Z, cornerZ + 3 * Displacement::Z, cornerZ + 4 * Displacement::Z,
+		cornerZ + Displacement::Z * 5, cornerZ + Displacement::Z * 6, cornerZ + Displacement::Z * 7, cornerZ + Displacement::Z * 8 };
 	buildFirstLevel(xCoord, buildingStartingHeight + Displacement::Y * 0, zCoord);
 	buildSecondLevel(xCoord, buildingStartingHeight + Displacement::Y * 1, zCoord);
 	buildThirdLevel(xCoord, buildingStartingHeight + Displacement::Y * 2, zCoord);

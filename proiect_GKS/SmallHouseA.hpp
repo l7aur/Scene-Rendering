@@ -4,7 +4,7 @@
 
 class SmallHouseA : public MinecraftBuilding {
 public:
-	SmallHouseA(gps::Shader& myShader);
+	SmallHouseA(gps::Shader& myShader, const float myCornerX, const float myCornerZ);
 private:
 	virtual void setup() override;
 	virtual void buildFirstLevel(const float* xCoord, const float& y, const float* zCoord) override;

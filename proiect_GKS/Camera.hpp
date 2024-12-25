@@ -34,7 +34,7 @@ namespace gps {
         float pitch{ 0.0f };
         float yaw{ -90.0f };
         const float sensivity{ 0.1f };
-        const float cameraSpeed{ 100.0f };
+        const float cameraSpeed{ 8.0f };
         const float nearPlane{ 0.1f };
         const float farPlane{ 100.0f };
         const float rotationSpeed{ 1000.0f };
