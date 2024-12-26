@@ -22,15 +22,7 @@ extern bool automatedTourStarted;
 namespace Util {
 	struct Tour {
 		const std::vector<std::pair<char, int>> directions;
-		Tour()
-			: directions{
-				{'F', 10}, // forward
-				{'L', 10}, // left
-				{'B', 10}, // backward
-				{'R', 10}  // right
-			}
-		{
-		}
+		Tour();
 	};
 	void windowResizeCallback(GLFWwindow* window, int width, int height);
 	void keyboardCallback(GLFWwindow* window, int key, int scancode, int action, int mode);

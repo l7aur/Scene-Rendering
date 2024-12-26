@@ -175,3 +175,13 @@ GLenum Util::glCheckError_(const char* file, int line)
 	}
 	return errorCode;
 }
+
+Util::Tour::Tour()
+	: directions{
+		{'F', 10}, // forward
+		{'L', 10}, // left
+		{'B', 10}, // backward
+		{'R', 10}  // right
+	}
+{
+}
