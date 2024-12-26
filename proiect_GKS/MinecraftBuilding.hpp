@@ -25,10 +25,10 @@ protected:
 	glm::vec3 rotation{ 90.0f, 0.0f, 0.0f };
 	glm::vec3 scale{ 1.0f, 1.0f, 1.0f };
 	glm::vec3 windowR{ 0.0f, 0.0f, 90.0f };
-	glm::vec3 rF = { 0.0f, 0.0f, 0.0f };
-	glm::vec3 rB = { 0.0f, -180.0f, 0.0f };
-	glm::vec3 rR = glm::vec3{ 0.0f, 90.0f, 0.0f };
-	glm::vec3 rL = glm::vec3{ 0.0f, -90.0f, 0.0f };
+	glm::vec3 noRotation = { 0.0f, 0.0f, 0.0f };
+	glm::vec3 rotateY180 = { 0.0f, -180.0f, 0.0f };
+	glm::vec3 rotateY90 = glm::vec3{ 0.0f, 90.0f, 0.0f };
+	glm::vec3 rotateYminus90 = glm::vec3{ 0.0f, -90.0f, 0.0f };
 
 	const float cornerX{}, cornerZ{};
 	virtual void setup() = 0;

@@ -3,8 +3,6 @@
 #include "Model3D.hpp"
 
 namespace ModelContainer {
-	constexpr float yLevel = 1.0f;
-
 	struct Minecraft {
 		gps::Model3D spruceLog;
 		gps::Model3D cobblestone;
@@ -35,7 +33,7 @@ namespace ModelContainer {
 	struct Others {
 		gps::Model3D grass;
 		Others() {
-			grass.LoadModel("models/others/grass/grass.obj");
+			grass.LoadModel("models/grass/grass.obj");
 		}
 	};
 }

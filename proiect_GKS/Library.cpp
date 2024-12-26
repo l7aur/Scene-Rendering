@@ -53,7 +53,7 @@ void Library::buildSecondLevel(const float* xCoord, const float& y, const float*
 		vertices.push_back(Object(&minecraft.stoneBricks, shader, { xCoord[7], y, zCoord[j] }, rotation, scale));
 	}
 	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[4], y, zCoord[6] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[5], y, zCoord[6] }, rR, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[5], y, zCoord[6] }, rotateY90, scale));
 
 	addBalconyPillors(xCoord, y, zCoord);
 }
@@ -79,7 +79,7 @@ void Library::buildThirdLevel(const float* xCoord, const float& y, const float* 
 		vertices.push_back(Object(&minecraft.stoneBricks, shader, { xCoord[1], y, zCoord[j] }, rotation, scale));
 		vertices.push_back(Object(&minecraft.stoneBricks, shader, { xCoord[7], y, zCoord[j] }, rotation, scale));
 	}
-	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[4], y, zCoord[6] }, rR, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[4], y, zCoord[6] }, rotateY90, scale));
 	addBalconyPillors(xCoord, y, zCoord);
 }
 
@@ -94,36 +94,36 @@ void Library::buildFourthLevel(const float* xCoord, const float& y, const float*
 		vertices.push_back(Object(&minecraft.stoneBricks, shader, { xCoord[1], y, zCoord[j] }, rotation, scale));
 		vertices.push_back(Object(&minecraft.stoneBricks, shader, { xCoord[7], y, zCoord[j] }, rotation, scale));
 	}
-	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[3], y, zCoord[6] }, rR, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[3], y, zCoord[6] }, rotateY90, scale));
 	addBalconyPillors(xCoord, y, zCoord);
 }
 
 void Library::buildFifthLevel(const float* xCoord, const float& y, const float* zCoord)
 {
-	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[2], y, zCoord[6] }, rR, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[2], y, zCoord[6] }, rotateY90, scale));
 	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[6], y, zCoord[6] }, rotation, scale));
 	for (int i = 2; i < 7; i++)
 		for (int j = 2; j < 7; j++) {
 			if (j == 3) {
-				vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[i], y, zCoord[7] }, rR, scale));
-				vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[i], y, zCoord[3] }, rR, scale));
-				vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[i], y, zCoord[1] }, rR, scale));
-				vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[i], y, zCoord[0] }, rR, scale));
+				vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[i], y, zCoord[7] }, rotateY90, scale));
+				vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[i], y, zCoord[3] }, rotateY90, scale));
+				vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[i], y, zCoord[1] }, rotateY90, scale));
+				vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[i], y, zCoord[0] }, rotateY90, scale));
 				continue;
 			}
 			if (j == 6)
 				continue;
 			vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[i], y, zCoord[j] }, rotation, scale));
 		}
-		vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[1], y, zCoord[3] }, rR, scale));
-		vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[7], y, zCoord[3] }, rR, scale));
-		vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[1], y, zCoord[7] }, rR, scale));
-		vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[7], y, zCoord[7] }, rR, scale));
+		vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[1], y, zCoord[3] }, rotateY90, scale));
+		vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[7], y, zCoord[3] }, rotateY90, scale));
+		vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[1], y, zCoord[7] }, rotateY90, scale));
+		vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[7], y, zCoord[7] }, rotateY90, scale));
 		for (int j = 2; j < 7; j++) {
 			if (j == 3)
 				continue;
-			vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[1], y, zCoord[j] }, rF, scale));
-			vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[7], y, zCoord[j] }, rF, scale));
+			vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[1], y, zCoord[j] }, noRotation, scale));
+			vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[7], y, zCoord[j] }, noRotation, scale));
 		}
 }
 
@@ -132,10 +132,10 @@ void Library::buildSixthLevel(const float* xCoord, const float& y, const float* 
 	addPillors(xCoord, y, zCoord);
 	addBalconyPillors(xCoord, y, zCoord);
 	glm::vec3 widen{ 1.0f, 1.0f, 2.0f };
-	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[3], y, zCoord[0] }, rR, widen));
-	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[5], y, zCoord[0] }, rR, widen));
-	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[2], y, zCoord[1] }, rF, widen));
-	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[6], y, zCoord[1] }, rF, widen));
+	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[3], y, zCoord[0] }, rotateY90, widen));
+	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[5], y, zCoord[0] }, rotateY90, widen));
+	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[2], y, zCoord[1] }, noRotation, widen));
+	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[6], y, zCoord[1] }, noRotation, widen));
 	for (int i = 2; i < 7; i++) {
 		if (i == 4) {
 			vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[i], y, zCoord[2] }, rotation, scale));
@@ -181,31 +181,31 @@ void Library::buildSeventhLevel(const float* xCoord, const float& y, const float
 		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[1], y, zCoord[j] }, rotation, scale));
 		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[7], y, zCoord[j] }, rotation, scale));
 	}
-	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[0], y, zCoord[1] }, rL, scale));
-	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[1], y, zCoord[1] }, rF, scale));
-	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[7], y, zCoord[1] }, rF, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[8], y, zCoord[1] }, rF, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[0], y, zCoord[2] }, rL, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[0], y, zCoord[3] }, rL, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[8], y, zCoord[2] }, rR, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[8], y, zCoord[3] }, rR, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[0], y, zCoord[1] }, rotateYminus90, scale));
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[1], y, zCoord[1] }, noRotation, scale));
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[7], y, zCoord[1] }, noRotation, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[8], y, zCoord[1] }, noRotation, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[0], y, zCoord[2] }, rotateYminus90, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[0], y, zCoord[3] }, rotateYminus90, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[8], y, zCoord[2] }, rotateY90, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[8], y, zCoord[3] }, rotateY90, scale));
 
-	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[0], y, zCoord[6] }, rL, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[0], y, zCoord[7] }, rL, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[8], y, zCoord[6] }, rR, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[8], y, zCoord[7] }, rR, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[0], y, zCoord[8] }, rB, scale));
-	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[1], y, zCoord[8] }, rB, scale));
-	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[7], y, zCoord[8] }, rB, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[8], y, zCoord[8] }, rR, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[0], y, zCoord[6] }, rotateYminus90, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[0], y, zCoord[7] }, rotateYminus90, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[8], y, zCoord[6] }, rotateY90, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[8], y, zCoord[7] }, rotateY90, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[0], y, zCoord[8] }, rotateY180, scale));
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[1], y, zCoord[8] }, rotateY180, scale));
+	vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[7], y, zCoord[8] }, rotateY180, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[8], y, zCoord[8] }, rotateY90, scale));
 
 }
 
 void Library::buildEigthLevel(const float* xCoord, const float& y, const float* zCoord)
 {
 	for (int j = 1; j < 9; j++) {
-		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[1], y, zCoord[j] }, rL, scale));
-		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[7], y, zCoord[j] }, rR, scale));
+		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[1], y, zCoord[j] }, rotateYminus90, scale));
+		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[7], y, zCoord[j] }, rotateY90, scale));
 	}
 	for (int i = 2; i < 7; i++) {
 		if (i == 4) {
@@ -221,8 +221,8 @@ void Library::buildEigthLevel(const float* xCoord, const float& y, const float* 
 void Library::buildNinthLevel(const float* xCoord, const float& y, const float* zCoord)
 {
 	for (int j = 1; j < 9; j++) {
-		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[2], y, zCoord[j] }, rL, scale));
-		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[6], y, zCoord[j] }, rR, scale));
+		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[2], y, zCoord[j] }, rotateYminus90, scale));
+		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[6], y, zCoord[j] }, rotateY90, scale));
 	}
 	for (int i = 3; i < 6; i++) {
 		if (i == 4) {
@@ -238,8 +238,8 @@ void Library::buildNinthLevel(const float* xCoord, const float& y, const float* 
 void Library::buildTenthLevel(const float* xCoord, const float& y, const float* zCoord)
 {
 	for (int j = 1; j < 9; j++) {
-		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[3], y, zCoord[j] }, rL, scale));
-		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[5], y, zCoord[j] }, rR, scale));
+		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[3], y, zCoord[j] }, rotateYminus90, scale));
+		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[5], y, zCoord[j] }, rotateY90, scale));
 	}
 	vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[4], y, zCoord[2] }, rotation, scale));
 	vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[4], y, zCoord[7] }, rotation, scale));
@@ -249,7 +249,7 @@ void Library::buildEleventhLevel(const float* xCoord, const float& y, const floa
 {
 	glm::vec3 scale{ 1.0f, 0.5f, 1.0f };
 	for (int j = 1; j < 9; j++) {
-		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[4], y - Displacement::Y / 4.0f, zCoord[j] }, rL, scale));
+		vertices.push_back(Object(&minecraft.sprucePlanks, shader, { xCoord[4], y - Displacement::Y / 4.0f, zCoord[j] }, rotateYminus90, scale));
 	}
 }
 
