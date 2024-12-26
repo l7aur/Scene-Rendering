@@ -10,6 +10,8 @@ void Util::keyboardCallback(GLFWwindow* window, int key, int scancode, int actio
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
 	myScene.getMyCamera()->keyboardCallback(deltaTime, window, key, scancode, action, mode);
+	if (key == GLFW_KEY_1 && action == GLFW_PRESS)
+		automatedTourStarted = !automatedTourStarted;
 }
 
 void Util::mouseCallback(GLFWwindow* window, double xPos, double yPos) {
@@ -28,7 +30,6 @@ void Util::initShader(gps::Shader& shader, const char* vertexShaderPath, const c
 void Util::buildScene(gps::Shader& shader)
 {
 	myScene.insertIntoScene(Object(&otherModels.grass, shader));
-
 	const float dx = std::abs(Displacement::X);
 	const float dz = std::abs(Displacement::Z);
 
@@ -38,10 +39,11 @@ void Util::buildScene(gps::Shader& shader)
 	TreeA treeA2(shader, 8 * dx, 16 * dz);
 	TreeA treeA3(shader, 16 * dx, -16 * dz);
 	TreeA treeA4(shader, -7 * dx, -16 * dz);
+	TreeA treeA5(shader, 30 * dx, -1 * dz);
 	
 	TreeB treeB1(shader, 9 * dx, -8 * dz);
 	TreeB treeB2(shader, -7 * dx, 18 * dz);
-	TreeB treeB3(shader, 18 * dx, -4 * dz);
+	TreeB treeB3(shader, 18 * dx, -10 * dz);
 	TreeB treeB4(shader, -21 * dx, 6 * dz);
 	
 	Church church1(shader, -7 * dx, -8 * dz);
@@ -54,12 +56,15 @@ void Util::buildScene(gps::Shader& shader)
 	SmallHouseA smallHA2(shader, -1 * dx, 18 * dz);
 	SmallHouseA smallHA3(shader, 22 * dx, 9 * dz);
 
+	Library library1(shader, 25 * dx, -10 * dz);
+
 	myScene.insertIntoScene(well1.getVertices());
 
 	myScene.insertIntoScene(treeA1.getVertices());
 	myScene.insertIntoScene(treeA2.getVertices());
 	myScene.insertIntoScene(treeA3.getVertices());
 	myScene.insertIntoScene(treeA4.getVertices());
+	myScene.insertIntoScene(treeA5.getVertices());
 
 	myScene.insertIntoScene(treeB1.getVertices());
 	myScene.insertIntoScene(treeB2.getVertices());
@@ -75,11 +80,13 @@ void Util::buildScene(gps::Shader& shader)
 	myScene.insertIntoScene(smallHA1.getVertices());
 	myScene.insertIntoScene(smallHA2.getVertices());
 	myScene.insertIntoScene(smallHA3.getVertices());
+
+	myScene.insertIntoScene(library1.getVertices());
 }
 
-void Util::sortBlocks()
+const std::vector<Object>::iterator Util::separateTransparents()
 {
-	std::vector<Object> v = myScene.getObjects();
+	std::vector<Object>& v = myScene.getObjects();
 	auto i = v.begin();
 	auto j = v.rbegin();
 	for (int k = 0; k < v.size();) {
@@ -101,31 +108,45 @@ void Util::sortBlocks()
 			j++, k++;
 		else
 			jStopped = true;
-		if (iStopped && jStopped)
-			std::swap(*i, *j), j++, i++, k += 2;
+		if (iStopped && jStopped) {
+			std::swap(*i, *j); 
+			j++; 
+			i++; 
+			k += 2;
+		}
 	}
-	/*for (auto& i : v) {
-		if (i.mesh == &minecraft.cobblestone)
-			std::cout << "cobblestone\n";
-		if(i.mesh==&minecraft.door)
-			std::cout << "door\n";
-		if(i.mesh==&minecraft.leaves)
-			std::cout << "leaves\n";
-		if(i.mesh==&minecraft.sprucePlanks)
-			std::cout << "planks\n";
-		if(i.mesh==&minecraft.spruceLog)
-			std::cout << "log\n";
-		if(i.mesh==&minecraft.fencePost)
-			std::cout << "fence\n";
-		if(i.mesh==&minecraft.glassBlock)
-			std::cout << "glass\n";
-		if(i.mesh==&minecraft.spruceStairsDefault)
-			std::cout << "stairs\n";
-		if(i.mesh==&minecraft.spruceStairsOutsideCorner)
-			std::cout << "stairsC\n";
-		if(i.mesh==&minecraft.water)
-			std::cout << "water\n";
-	}*/
+	return i;
+}
+
+void Util::sortBlocks(const std::vector<Object>::iterator& startingIt, const glm::vec3& frontDirection)
+{
+	char dominantAxis =
+		(std::abs(frontDirection.x) > std::abs(frontDirection.y) && std::abs(frontDirection.x) > std::abs(frontDirection.z)) ?
+		((frontDirection.x < 0) ? 'x' : 'X') :
+		(std::abs(frontDirection.y) > std::abs(frontDirection.x) && std::abs(frontDirection.y) > std::abs(frontDirection.z)) ?
+		((frontDirection.y < 0) ? 'y' : 'Y') :
+		((frontDirection.z < 0) ? 'z' : 'Z');
+	std::sort(startingIt, myScene.getObjects().end(),
+		[dominantAxis](const Object& x, const Object& y)
+		{
+			switch (dominantAxis)
+			{
+			case 'x':
+				return x.translation.x < y.translation.x;
+			case 'y':
+				return x.translation.y < y.translation.y;
+			case 'z':
+				return x.translation.z < y.translation.z;
+			case 'X':
+				return x.translation.x > y.translation.x;
+			case 'Y':
+				return x.translation.y > y.translation.y;
+			case 'Z':
+				return x.translation.z > y.translation.z;
+			default:
+				return false;
+			}
+		});
 }
 
 GLenum Util::glCheckError_(const char* file, int line)

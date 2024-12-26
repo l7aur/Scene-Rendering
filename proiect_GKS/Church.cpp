@@ -47,6 +47,7 @@ void Church::buildSecondLevel(const float* xCoord, const float& y, const float* 
 		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[4], y, zCoord[j] }, rotation, scale));
 	}
 	vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[1], y, zCoord[0] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.door, shader, { xCoord[2], y, zCoord[0] }, rotation, scale));
 	vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[3], y, zCoord[0] }, rotation, scale));
 }
 
@@ -60,10 +61,10 @@ void Church::buildThirdLevel(const float* xCoord, const float& y, const float* z
 		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[0], y, zCoord[j] }, rotation, scale));
 		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[4], y, zCoord[j] }, rotation, scale));
 	}
-	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[0], y, zCoord[2] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[4], y, zCoord[2] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[1], y, zCoord[0] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[3], y, zCoord[0] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[0], y, zCoord[2] }, windowR, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[4], y, zCoord[2] }, windowR, scale));
+	vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[1], y, zCoord[0] }, windowR, scale));
+	vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[3], y, zCoord[0] }, windowR, scale));
 }
 
 void Church::buildFourthLevel(const float* xCoord, const float& y, const float* zCoord)
@@ -77,10 +78,10 @@ void Church::buildFourthLevel(const float* xCoord, const float& y, const float* 
 		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[0], y, zCoord[j] }, rotation, scale));
 		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[4], y, zCoord[j] }, rotation, scale));
 	}
-	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[0], y, zCoord[2] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[0], y, zCoord[6] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[4], y, zCoord[2] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[4], y, zCoord[6] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[0], y, zCoord[2] }, windowR, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[0], y, zCoord[6] }, windowR, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[4], y, zCoord[2] }, windowR, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[4], y, zCoord[6] }, windowR, scale));
 	for (int i = 1; i < 4; i++)
 		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[i], y, zCoord[0] }, rotation, scale));
 }
@@ -125,8 +126,8 @@ void Church::buildSeventhLevel(const float* xCoord, const float& y, const float*
 	vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[0], y, zCoord[5] }, rotation, scale));
 	vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[4], y, zCoord[5] }, rotation, scale));
 	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[2], y, zCoord[8] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[0], y, zCoord[6] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[4], y, zCoord[6] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[0], y, zCoord[6] }, windowR, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[4], y, zCoord[6] }, windowR, scale));
 	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[2], y, zCoord[4] }, rotation, scale));
 }
 

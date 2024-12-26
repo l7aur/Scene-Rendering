@@ -23,6 +23,7 @@
     <ClCompile Include="BigHouseA.hpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Church.cpp" />
+    <ClCompile Include="Library.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MinecraftBuilding.cpp" />
@@ -42,6 +43,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="Church.hpp" />
+    <ClInclude Include="Library.hpp" />
     <ClInclude Include="MinecraftBuilding.hpp" />
     <ClInclude Include="ModelContainer.hpp" />
     <ClInclude Include="Mesh.hpp" />

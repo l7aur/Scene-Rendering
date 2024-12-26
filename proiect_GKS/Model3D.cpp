@@ -59,9 +59,6 @@ namespace gps {
 
 				int fv = shapes[s].mesh.num_face_vertices[f];
 
-				//gps::Texture currentTexture = LoadTexture("index1.png", "ambientTexture");
-				//textures.push_back(currentTexture);
-
 				// Loop over vertices in the face.
 				for (size_t v = 0; v < fv; v++) {
 
@@ -107,21 +104,6 @@ namespace gps {
 			if (a > 0 && materials.size()>0) {
 				materialId = shapes[s].mesh.material_ids[0];
 				if (materialId != -1) {
-		std::cout << materials[materialId].ior<< '\n';
-		for (int tt = 0; tt < 3; tt++)
-			std::cout << materials[materialId].diffuse[tt] << '\n';
-		for (int tt = 0; tt < 3; tt++)
-			std::cout << materials[materialId].ambient[tt] << '\n';
-		for (int tt = 0; tt < 3; tt++)
-			std::cout << materials[materialId].specular[tt] << '\n';
-		std::cout << materials[materialId].name << '\n';
-		std::cout << materials[materialId].shininess << '\n';
-
-					gps::Material currentMaterial;
-					currentMaterial.ambient = glm::vec3(materials[materialId].ambient[0], materials[materialId].ambient[1], materials[materialId].ambient[2]);
-					currentMaterial.diffuse = glm::vec3(materials[materialId].diffuse[0], materials[materialId].diffuse[1], materials[materialId].diffuse[2]);
-					currentMaterial.specular = glm::vec3(materials[materialId].specular[0], materials[materialId].specular[1], materials[materialId].specular[2]);
-
 					//ambient texture
 					std::string ambientTexturePath = materials[materialId].ambient_texname;
 
@@ -134,7 +116,6 @@ namespace gps {
 
 					//diffuse texture
 					std::string diffuseTexturePath = materials[materialId].diffuse_texname;
-		std::cout << diffuseTexturePath << "aaa\n";
 					if (!diffuseTexturePath.empty()) {
 
 						gps::Texture currentTexture;
@@ -144,7 +125,6 @@ namespace gps {
 
 					//specular texture
 					std::string specularTexturePath = materials[materialId].specular_texname;
-		std::cout << specularTexturePath << "aaa\n";
 
 					if (!specularTexturePath.empty()) {
 

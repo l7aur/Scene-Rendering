@@ -24,13 +24,6 @@ vec3 diffuse;
 vec3 specular;
 float specularStrength = 0.5;
 
-uniform vec3 Ka; // Ambient reflectivity
-uniform vec3 Kd; // Diffuse reflectivity
-uniform vec3 Ks; // Specular reflectivity
-uniform float Ns; // Specular shininess
-uniform float d;  // Opacity
-
-
 void computeDirLight()
 {
     //compute eye space coordinates
@@ -61,6 +54,5 @@ void main()
 
     //compute final vertex color
     vec3 color = min((ambient + diffuse) * texture(diffuseTexture, fTexCoords).rgb + specular * texture(specularTexture, fTexCoords).rgb, 1.0);
-
-    fColor = vec4(color, 1.0);
+    fColor = vec4(color, texture(diffuseTexture, fTexCoords).a);
 }

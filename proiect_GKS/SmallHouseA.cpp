@@ -41,6 +41,7 @@ void SmallHouseA::buildSecondLevel(const float* xCoord, const float& y, const fl
 		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[4], y, zCoord[i] }, rotation, scale));
 	}
 	vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[1], y, zCoord[0] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.door, shader, { xCoord[2], y, zCoord[0] }, rotation, scale));
 	vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[3], y, zCoord[0] }, rotation, scale));
 }
 
@@ -58,8 +59,8 @@ void SmallHouseA::buildThirdLevel(const float* xCoord, const float& y, const flo
 	vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[3], y, zCoord[0] }, rotation, scale));
 
 	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[2], y, zCoord[4] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[0], y, zCoord[2] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[4], y, zCoord[2] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[0], y, zCoord[2] }, windowR, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[4], y, zCoord[2] }, windowR, scale));
 }
 
 void SmallHouseA::buildFourthLevel(const float* xCoord, const float& y, const float* zCoord) {
@@ -94,10 +95,10 @@ void SmallHouseA::buildFifthLevel(const float* xCoord, const float& y, const flo
 	glm::vec3 r3 = glm::vec3{ 0.0, -90.0f, 0.0f };
 	glm::vec3 r4 = glm::vec3{ 0.0, 0.0f, 0.0f };
 
-	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[4] + Displacement::X, y, zCoord[4] + Displacement::Z}, rCRB, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[0] - Displacement::X, y, zCoord[4] + Displacement::Z}, rCLB, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[0] - Displacement::X, y, zCoord[0] - Displacement::Z}, rCLF, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[4] + Displacement::X, y, zCoord[0] - Displacement::Z}, rCRF, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[4] + Displacement::X, y, zCoord[4] + Displacement::Z}, rR, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[0] - Displacement::X, y, zCoord[4] + Displacement::Z}, rB, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[0] - Displacement::X, y, zCoord[0] - Displacement::Z}, rL, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[4] + Displacement::X, y, zCoord[0] - Displacement::Z}, rF, scale));
 }
 
 void SmallHouseA::buildSixthLevel(const float* xCoord, const float& y, const float* zCoord)
@@ -120,10 +121,10 @@ void SmallHouseA::buildSixthLevel(const float* xCoord, const float& y, const flo
 		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[i], y, zCoord[0] }, rF, scale));
 		vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[i], y, zCoord[4] }, rB, scale));
 	}
-	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[4], y, zCoord[4] }, rCRB, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[0], y, zCoord[4] }, rCLB, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[0], y, zCoord[0] }, rCLF, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[4], y, zCoord[0] }, rCRF, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[4], y, zCoord[4] }, rR, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[0], y, zCoord[4] }, rB, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[0], y, zCoord[0] }, rL, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[4], y, zCoord[0] }, rF, scale));
 }
 
 void SmallHouseA::buildSeventhLevel(const float* xCoord, const float& y, const float* zCoord)
@@ -133,10 +134,10 @@ void SmallHouseA::buildSeventhLevel(const float* xCoord, const float& y, const f
 	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[3], y, zCoord[2] }, rR, scale));
 	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[2], y, zCoord[3] }, rB, scale));
 	vertices.push_back(Object(&minecraft.spruceStairsDefault, shader, { xCoord[2], y, zCoord[1] }, rF, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[3], y, zCoord[3] }, rCRB, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[1], y, zCoord[3] }, rCLB, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[1], y, zCoord[1] }, rCLF, scale));
-	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[3], y, zCoord[1] }, rCRF, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[3], y, zCoord[3] }, rR, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[1], y, zCoord[3] }, rB, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[1], y, zCoord[1] }, rL, scale));
+	vertices.push_back(Object(&minecraft.spruceStairsOutsideCorner, shader, { xCoord[3], y, zCoord[1] }, rF, scale));
 }
 
 void SmallHouseA::addPillors(const float* xCoord, const float& y, const float* zCoord) {

@@ -19,4 +19,4 @@ private:
 	virtual void buildTenthLevel(const float* xCoord, const float& y, const float* zCoord) override;
 	virtual void buildEleventhLevel(const float* xCoord, const float& y, const float* zCoord) override;
 	virtual void buildTwelvthLevel(const float* xCoord, const float& y, const float* zCoord) override;
-}; 
+};

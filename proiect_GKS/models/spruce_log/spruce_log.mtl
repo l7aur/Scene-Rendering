@@ -10,6 +10,7 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kd spruce_log_top.png
+map_Bump -bm 1.000000 spruce_log_top_n.png
 
 newmtl Material.001
 Ns 250.000000
@@ -20,3 +21,4 @@ Ni 1.500000
 d 1.000000
 illum 2
 map_Kd spruce_log.png
+map_Bump -bm 1.000000 spruce_log_n.png

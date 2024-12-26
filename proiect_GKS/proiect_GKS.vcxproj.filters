@@ -72,6 +72,9 @@
     <ClCompile Include="BigHouseA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Library.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.hpp">
@@ -120,6 +123,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TreeA.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Library.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

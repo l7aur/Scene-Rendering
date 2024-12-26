@@ -5,7 +5,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 #include <GLFW/glfw3.h>
-#include <iostream>
 
 namespace gps {
 
@@ -25,7 +24,7 @@ namespace gps {
         void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
         glm::mat4 getProjectionMatrix(float aspectRatio);
         GLfloat getModelAngle() const { return angle; };
-
+        const glm::vec3 getCameraFrontDir() const { return this->cameraFrontDirection; };
     private:
         bool firstMouse{ true };
         float zoom{ 70.0f };
@@ -34,7 +33,7 @@ namespace gps {
         float pitch{ 0.0f };
         float yaw{ -90.0f };
         const float sensivity{ 0.1f };
-        const float cameraSpeed{ 8.0f };
+        const float cameraSpeed{ 50.0f };
         const float nearPlane{ 0.1f };
         const float farPlane{ 100.0f };
         const float rotationSpeed{ 1000.0f };

@@ -3,7 +3,6 @@
 #include "Window.h"
 #include "Shader.hpp"
 #include "Camera.hpp"
-#include <iostream>
 #include "Object.hpp"
 #include "tiny_obj_loader.h"
 #include <glm/gtc/matrix_transform.hpp> //glm extension for generating common transformation matrices
@@ -25,11 +24,11 @@ public:
 	void insertIntoScene(const std::vector<Object>& objects);
 	gps::Window getMyWindow() const { return myWindow; };
 	gps::Camera* getMyCamera() const { return myCamera; };
-	const std::vector<Object> getObjects() const { return myObjects; };
+	std::vector<Object>& getObjects() { return myObjects; };
 	void renderObjects();
 private:
 	void initOpenGLWindow();
-	void initOpenGLState();
+	void initOpenGLState();	
 
 	gps::Window myWindow;
 	glm::mat4 model;

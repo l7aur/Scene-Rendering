@@ -60,10 +60,10 @@ void SceneRenderer::initOpenGLState()
     glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
     glViewport(0, 0, myWindow.getWindowDimensions().width, myWindow.getWindowDimensions().height);
     glEnable(GL_FRAMEBUFFER_SRGB);
-  //  glEnable(GL_BLEND);
+    glEnable(GL_BLEND);
     glEnable(GL_DEPTH_TEST); // enable depth-testing
     glDepthFunc(GL_LESS); // depth-testing interprets a smaller value as "closer"
-  //  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //glEnable(GL_CULL_FACE); // cull face
     //glCullFace(GL_BACK); // cull back face
     //glFrontFace(GL_CCW); // GL_CCW for counter clock-wise

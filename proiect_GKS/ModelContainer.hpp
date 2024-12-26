@@ -16,6 +16,7 @@ namespace ModelContainer {
 		gps::Model3D spruceStairsOutsideCorner;
 		gps::Model3D leaves;
 		gps::Model3D door;
+		gps::Model3D stoneBricks;
 		Minecraft() {
 			spruceLog.LoadModel("models/spruce_log/spruce_log.obj");
 			cobblestone.LoadModel("models/cobblestone/cobblestone.obj");
@@ -24,13 +25,10 @@ namespace ModelContainer {
 			leaves.LoadModel("models/spruce_leaves/spruce_leaves.obj");
 			spruceStairsDefault.LoadModel("models/spruce_stairs_default/spruce_stairs_default.obj");
 			spruceStairsOutsideCorner.LoadModel("models/spruce_stairs_outside_corner/spruce_stairs_outside_corner.obj");
-			door.LoadModel("models/spruce_door/spruce_door.obj");
-			/*DEBUG*/ fencePost = water = spruceLog;
-			
-			// to be added
-			// fencePost.LoadModel("models/fence_post/fence_post.obj");
-			// spruceStairs.LoadModel("models/spruce_stairs/spruce_stairs.obj");
-			// water.LoadModel("models/water/water.obj");
+			door.LoadModel("models/oak_door/oak_door.obj");
+			fencePost.LoadModel("models/oak_log/oak_log.obj");
+			water.LoadModel("models/water/water.obj");
+			stoneBricks.LoadModel("models/stone_bricks/stone_bricks.obj");
 		}
 	};
 

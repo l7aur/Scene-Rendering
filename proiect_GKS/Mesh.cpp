@@ -7,7 +7,6 @@ namespace gps {
 		this->vertices = vertices;
 		this->indices = indices;
 		this->textures = textures;
-
 		this->setupMesh();
 	}
 

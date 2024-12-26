@@ -52,7 +52,7 @@ void BigHouseA::buildSecondLevel(const float* xCoord, const float& y, const floa
 		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[8], y, zCoord[j] }, rotation, scale));
 	}
 	vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[3], y, zCoord[3] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.door, shader, { xCoord[4], y + 1.0f, zCoord[0] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.door, shader, { xCoord[4], y, zCoord[0] }, rotation, scale));
 	vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[4], y, zCoord[3] }, rotation, scale));
 }
 
@@ -76,8 +76,8 @@ void BigHouseA::buildThirdLevel(const float* xCoord, const float& y, const float
 	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[2], y, zCoord[4] }, rotation, scale));
 	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[6], y, zCoord[0] }, rotation, scale));
 	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[6], y, zCoord[4] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[0], y, zCoord[2] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[8], y, zCoord[2] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[0], y, zCoord[2] }, windowR, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[8], y, zCoord[2] }, windowR, scale));
 }
 
 void BigHouseA::buildFourthLevel(const float* xCoord, const float& y, const float* zCoord)
@@ -154,8 +154,8 @@ void BigHouseA::buildSeventhLevel(const float* xCoord, const float& y, const flo
 	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[2], y, zCoord[4] }, rotation, scale));
 	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[4], y, zCoord[4] }, rotation, scale));
 	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[6], y, zCoord[4] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[0], y, zCoord[2] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[8], y, zCoord[2] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[0], y, zCoord[2] }, windowR, scale));
+	vertices.push_back(Object(&minecraft.glassBlock, shader, { xCoord[8], y, zCoord[2] }, windowR, scale));
 }
 
 void BigHouseA::buildEigthLevel(const float* xCoord, const float& y, const float* zCoord)

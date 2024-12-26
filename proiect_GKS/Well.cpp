@@ -36,11 +36,13 @@ void Well::buildSecondLevel(const float* xCoord, const float& y, const float* zC
 		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[1], y, zCoord[j] }, rotation, scale));
 		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[5], y, zCoord[j] }, rotation, scale));
 	}
+	for (int i = 2; i < 5; i++)
+		for (int j = 2; j < 5; j++)
+			vertices.push_back(Object(&minecraft.water, shader, { xCoord[i], y, zCoord[j] }, rotation, scale));
 }
 
 void Well::buildThirdLevel(const float* xCoord, const float& y, const float* zCoord)
 {
-	//add fencegates
 	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[1], y, zCoord[1] }, rotation, scale));
 	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[1], y, zCoord[5] }, rotation, scale));
 	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[5], y, zCoord[1] }, rotation, scale));
