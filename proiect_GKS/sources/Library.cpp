@@ -1,4 +1,4 @@
-#include "Library.hpp"
+#include "../headers/Library.hpp"
 
 Library::Library(gps::Shader& myShader, const float myCornerX, const float myCornerZ)
 	: MinecraftBuilding(myShader, myCornerX, myCornerZ)

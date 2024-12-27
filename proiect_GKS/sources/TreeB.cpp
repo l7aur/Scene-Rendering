@@ -1,4 +1,4 @@
-#include "TreeB.hpp"
+#include "../headers/TreeB.hpp"
 
 TreeB::TreeB(gps::Shader myShader, const float myCornerX, const float myCornerZ)
 	: MinecraftBuilding(myShader, myCornerX, myCornerZ)

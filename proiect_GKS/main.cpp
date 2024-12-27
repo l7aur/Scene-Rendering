@@ -1,4 +1,4 @@
-#include "Util.hpp"
+#include "headers/Util.hpp"
 
 GLfloat angle{ 0.0f };
 float currentFrameTime{ 0.0f };

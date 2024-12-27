@@ -1,4 +1,4 @@
-#include "Util.hpp"
+#include "../headers/Util.hpp"
 
 void Util::windowResizeCallback(GLFWwindow* window, int width, int height) {
 	fprintf(stdout, "Window resized! New width: %d , and height: %d\n", width, height);

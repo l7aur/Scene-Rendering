@@ -6,7 +6,7 @@
 //  Copyright © 2016 CGIS. All rights reserved.
 //
 
-#include "Shader.hpp"
+#include "../headers/Shader.hpp"
 
 namespace gps {
     std::string Shader::readShaderFile(std::string fileName) {

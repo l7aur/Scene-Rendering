@@ -1,4 +1,4 @@
-#include "BigHouseA.hpp"
+#include "../headers/BigHouseA.hpp"
 
 BigHouseA::BigHouseA(gps::Shader myShader, const float myCornerX, const float myCornerZ)
 	: MinecraftBuilding(myShader, myCornerX, myCornerZ)

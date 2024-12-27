@@ -3,8 +3,8 @@
 
 #include "Mesh.hpp"
 
-#include "tiny_obj_loader.h"
-#include "stb_image.h"
+#include "../headers/tiny_obj_loader.h"
+#include "../headers/stb_image.h"
 
 #include <iostream>
 #include <string>

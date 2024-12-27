@@ -1,4 +1,4 @@
-#include "Mesh.hpp"
+#include "../headers/Mesh.hpp"
 namespace gps {
 
 	/* Mesh Constructor */

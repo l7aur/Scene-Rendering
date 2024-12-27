@@ -1,4 +1,4 @@
-#include "Window.h"
+#include "../headers/Window.h"
 
 namespace gps {
 

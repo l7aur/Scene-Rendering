@@ -1,4 +1,4 @@
-#include "SceneRenderer.hpp"
+#include "../headers/SceneRenderer.hpp"
 
 SceneRenderer::SceneRenderer()
 {

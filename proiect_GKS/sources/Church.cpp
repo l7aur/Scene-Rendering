@@ -1,4 +1,4 @@
-#include "Church.hpp"
+#include "../headers/Church.hpp"
 
 Church::Church(gps::Shader& myShader, const float myCornerX, const float myCornerZ)
 	: MinecraftBuilding(myShader, myCornerX, myCornerX)

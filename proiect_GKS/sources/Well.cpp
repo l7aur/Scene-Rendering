@@ -1,4 +1,4 @@
-#include "Well.hpp"
+#include "../headers/Well.hpp"
 
 Well::Well(gps::Shader& myShader, const float myCornerX, const float myCornerZ)
 	: MinecraftBuilding(myShader, myCornerX, myCornerZ)
