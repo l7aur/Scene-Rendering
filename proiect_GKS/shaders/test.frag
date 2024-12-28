@@ -6,53 +6,39 @@ in vec2 fTexCoords;
 
 out vec4 fColor;
 
-//matrices
-uniform mat4 model;
-uniform mat4 view;
-uniform mat3 normalMatrix;
-//lighting
-uniform vec3 lightDir;
-uniform vec3 lightColor;
-// textures
+struct DirectionalLight {
+	vec3 direction;
+	vec3 colour;
+	float ambientIntensity;
+	float diffuseIntensity;
+};
+
+struct Material {
+	float specularIntensity;
+	float shininess;
+};
+
 uniform sampler2D diffuseTexture;
-uniform sampler2D specularTexture;
+uniform DirectionalLight directionalLight;
+uniform Material material;
+uniform vec3 eyePosition;
 
-//components
-vec3 ambient;
-float ambientStrength = 0.2;
-vec3 diffuse;
-vec3 specular;
-float specularStrength = 0.5;
+void main() {
+	vec4 ambientColour = vec4(directionalLight.colour * directionalLight.ambientIntensity, 1.0f);
 
-void computeDirLight()
-{
-    //compute eye space coordinates
-    vec4 fPosEye = view * model * vec4(fPosition, 1.0);
-    vec3 normalEye = normalize(normalMatrix * fNormal);
+	float diffuseFactor = max(dot(normalize(fNormal), normalize(directionalLight.direction)), 0.0f);
+	vec4 diffuseColour = vec4((directionalLight.colour * directionalLight.diffuseIntensity * diffuseFactor), 1.0f);
 
-    //normalize light direction
-    vec3 lightDirN = vec3(normalize(view * vec4(lightDir, 0.0)));
+	vec4 specularColour  = vec4(0.0f, 0.0f, 0.0f, 0.0f);
+	if(diffuseFactor > 0.0f) {
+		vec3 fragToEye = normalize(eyePosition - fPosition);
+		vec3 reflectedVertex = normalize(reflect(directionalLight.direction, normalize(fNormal)));
+		float specularFactor = dot(fragToEye, reflectedVertex);
+		if(specularFactor > 0.0f) {
+			specularFactor = pow(specularFactor, material.shininess);
+			specularColour = vec4(directionalLight.colour * material.specularIntensity * specularFactor, 1.0f);
+		}
+	}
 
-    //compute view direction (in eye coordinates, the viewer is situated at the origin
-    vec3 viewDir = normalize(- fPosEye.xyz);
-
-    //compute ambient light
-    ambient = ambientStrength * lightColor;
-
-    //compute diffuse light
-    diffuse = max(dot(normalEye, lightDirN), 0.0) * lightColor;
-
-    //compute specular light
-    vec3 reflectDir = reflect(-lightDirN, normalEye);
-    float specCoeff = pow(max(dot(viewDir, reflectDir), 0.0), 32);
-    specular = specularStrength * specCoeff * lightColor;
-}
-
-void main() 
-{
-    computeDirLight();
-
-    //compute final vertex color
-    vec3 color = min((ambient + diffuse) * texture(diffuseTexture, fTexCoords).rgb + specular * texture(specularTexture, fTexCoords).rgb, 1.0);
-    fColor = vec4(color, texture(diffuseTexture, fTexCoords).a);
+	fColor = texture(diffuseTexture, fTexCoords) * (ambientColour + diffuseColour + specularColour);
 }

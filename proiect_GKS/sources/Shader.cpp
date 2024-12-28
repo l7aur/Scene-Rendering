@@ -89,11 +89,30 @@ namespace gps {
         glDeleteShader(fragmentShader);
         //check linking info
         shaderLinkLog(this->shaderProgram);
+        initUniforms();
     }
     
     void Shader::useShaderProgram() {
 
         glUseProgram(this->shaderProgram);
+    }
+
+    void Shader::initUniforms()
+    {
+        setModelLocUniform(glGetUniformLocation(shaderProgram, "model"));
+        setViewLocUniform(glGetUniformLocation(shaderProgram, "view"));
+        setNormalMatrixLocUniform(glGetUniformLocation(shaderProgram, "normalMatrix"));
+        setProjectionLocUniform(glGetUniformLocation(shaderProgram, "projection"));
+
+        setAmbientColourUniform(glGetUniformLocation(shaderProgram, "directionalLight.colour"));
+        setAmbientIntensityUniform(glGetUniformLocation(shaderProgram, "directionalLight.ambientIntensity"));
+
+        setDiffuseIntensityUniform(glGetUniformLocation(shaderProgram, "directionalLight.diffuseIntensity"));
+        setDirectionUniform(glGetUniformLocation(shaderProgram, "directionalLight.direction"));
+
+        setEyePositionUniform(glGetUniformLocation(shaderProgram, "eyePosition"));
+        setSpecularIntensityUniform(glGetUniformLocation(shaderProgram, "material.specularIntensity"));
+        setSpecularShininessUniform(glGetUniformLocation(shaderProgram, "material.shininess"));
     }
 
 }

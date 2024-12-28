@@ -23,30 +23,30 @@ void Well::buildFirstLevel(const float* xCoord, const float& y, const float* zCo
 {
 	for(int i = 0; i < 7; i++)
 		for(int j = 0; j < 7; j++)
-			vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[i], y, zCoord[j] }, rotation, scale));
+			vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[i], y, zCoord[j] }, rotation, scale, MATERIAL_TYPE::STONE));
 }
 
 void Well::buildSecondLevel(const float* xCoord, const float& y, const float* zCoord)
 {
 	for (int i = 1; i <= 5; i++) {
-		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[i], y, zCoord[1] }, rotation, scale));
-		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[i], y, zCoord[5] }, rotation, scale));
+		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[i], y, zCoord[1] }, rotation, scale, MATERIAL_TYPE::STONE));
+		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[i], y, zCoord[5] }, rotation, scale, MATERIAL_TYPE::STONE));
 	}
 	for (int j = 2; j < 5; j++) {
-		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[1], y, zCoord[j] }, rotation, scale));
-		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[5], y, zCoord[j] }, rotation, scale));
+		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[1], y, zCoord[j] }, rotation, scale, MATERIAL_TYPE::STONE));
+		vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[5], y, zCoord[j] }, rotation, scale, MATERIAL_TYPE::STONE));
 	}
 	for (int i = 2; i < 5; i++)
 		for (int j = 2; j < 5; j++)
-			vertices.push_back(Object(&minecraft.water, shader, { xCoord[i], y, zCoord[j] }, rotation, scale));
+			vertices.push_back(Object(&minecraft.water, shader, { xCoord[i], y, zCoord[j] }, rotation, scale, MATERIAL_TYPE::WATER));
 }
 
 void Well::buildThirdLevel(const float* xCoord, const float& y, const float* zCoord)
 {
-	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[1], y, zCoord[1] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[1], y, zCoord[5] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[5], y, zCoord[1] }, rotation, scale));
-	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[5], y, zCoord[5] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[1], y, zCoord[1] }, rotation, scale, MATERIAL_TYPE::WOOD));
+	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[1], y, zCoord[5] }, rotation, scale, MATERIAL_TYPE::WOOD));
+	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[5], y, zCoord[1] }, rotation, scale, MATERIAL_TYPE::WOOD));
+	vertices.push_back(Object(&minecraft.fencePost, shader, { xCoord[5], y, zCoord[5] }, rotation, scale, MATERIAL_TYPE::WOOD));
 	return;
 }
 
@@ -59,5 +59,5 @@ void Well::buildFifthLevel(const float* xCoord, const float& y, const float* zCo
 {
 	for (int i = 1; i < 6; i++)
 		for (int j = 1; j < 6; j++)
-			vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[i], y, zCoord[j] }, rotation, scale));
+			vertices.push_back(Object(&minecraft.cobblestone, shader, { xCoord[i], y, zCoord[j] }, rotation, scale, MATERIAL_TYPE::STONE));
 }

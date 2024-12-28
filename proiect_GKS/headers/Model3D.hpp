@@ -16,11 +16,8 @@ namespace gps {
 
     public:
         ~Model3D();
-
 		void LoadModel(std::string fileName);
-
 		void LoadModel(std::string fileName, std::string basePath);
-
 		void Draw(gps::Shader shaderProgram);
 
     private:

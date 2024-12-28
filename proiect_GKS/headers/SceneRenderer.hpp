@@ -13,7 +13,6 @@ class SceneRenderer {
 public:
 	SceneRenderer();
 	~SceneRenderer();
-	void initUniforms(gps::Shader& shader);
 	void updateShaderMatrices(gps::Shader& shader);
 	void setWindowCallbacks(
 		void (*resizeCallback)(GLFWwindow*, int, int), 
@@ -37,12 +36,6 @@ private:
 	glm::mat3 normalMatrix;
 	glm::vec3 lightDir;
 	glm::vec3 lightColor;
-	GLint modelLoc;
-	GLint viewLoc;
-	GLint projectionLoc;
-	GLint normalMatrixLoc;
-	GLint lightDirLoc;
-	GLint lightColorLoc;
 	gps::Camera* myCamera;
 	std::vector<Object> myObjects;
 };

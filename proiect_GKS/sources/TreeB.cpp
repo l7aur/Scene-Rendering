@@ -23,7 +23,7 @@ void TreeB::setup()
 
 void TreeB::buildFirstLevel(const float* xCoord, const float& y, const float* zCoord)
 {
-	vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[1], y, zCoord[1] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[1], y, zCoord[1] }, rotation, scale, MATERIAL_TYPE::LOG));
 }
 
 void TreeB::buildSecondLevel(const float* xCoord, const float& y, const float* zCoord)

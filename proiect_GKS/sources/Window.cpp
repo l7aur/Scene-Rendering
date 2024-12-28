@@ -34,7 +34,12 @@ namespace gps {
 #if not defined (__APPLE__)
         // start GLEW extension handler
         glewExperimental = GL_TRUE;
-        glewInit();
+        if (glewInit()) {
+            printf("GLEW initialization failed!\n");
+            glfwDestroyWindow(window);
+            glfwTerminate();
+            return;
+        }
 #endif
 
         // get version info

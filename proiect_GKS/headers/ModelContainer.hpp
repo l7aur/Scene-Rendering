@@ -15,6 +15,7 @@ namespace ModelContainer {
 		gps::Model3D leaves;
 		gps::Model3D door;
 		gps::Model3D stoneBricks;
+		gps::Model3D torch;
 		Minecraft() {
 			spruceLog.LoadModel("models/spruce_log/spruce_log.obj");
 			cobblestone.LoadModel("models/cobblestone/cobblestone.obj");
@@ -27,6 +28,7 @@ namespace ModelContainer {
 			fencePost.LoadModel("models/oak_log/oak_log.obj");
 			water.LoadModel("models/water/water.obj");
 			stoneBricks.LoadModel("models/stone_bricks/stone_bricks.obj");
+			torch.LoadModel("models/torch_normal/torch.obj");
 		}
 	};
 

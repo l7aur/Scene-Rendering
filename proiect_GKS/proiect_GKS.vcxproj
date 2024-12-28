@@ -24,6 +24,8 @@
     <ClCompile Include="sources\Camera.cpp" />
     <ClCompile Include="sources\Church.cpp" />
     <ClCompile Include="sources\Library.cpp" />
+    <ClCompile Include="sources\Light.cpp" />
+    <ClCompile Include="sources\Material.cpp" />
     <ClCompile Include="sources\Mesh.cpp" />
     <ClCompile Include="sources\MinecraftBuilding.cpp" />
     <ClCompile Include="sources\Model3D.cpp" />
@@ -43,6 +45,7 @@
     <ClInclude Include="headers\Camera.hpp" />
     <ClInclude Include="headers\Church.hpp" />
     <ClInclude Include="headers\Library.hpp" />
+    <ClInclude Include="headers\Material.hpp" />
     <ClInclude Include="headers\Mesh.hpp" />
     <ClInclude Include="headers\MinecraftBuilding.hpp" />
     <ClInclude Include="headers\Model3D.hpp" />
@@ -58,6 +61,7 @@
     <ClInclude Include="headers\Util.hpp" />
     <ClInclude Include="headers\Well.hpp" />
     <ClInclude Include="headers\Window.h" />
+    <ClInclude Include="Light.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\basic.frag" />

@@ -25,6 +25,7 @@ namespace gps {
         glm::mat4 getProjectionMatrix(float aspectRatio);
         GLfloat getModelAngle() const { return angle; };
         const glm::vec3 getCameraFrontDir() const { return this->cameraFrontDirection; };
+        const glm::vec3 getPosition() const { return this->cameraPosition; };
     private:
         bool firstMouse{ true };
         float zoom{ 70.0f };

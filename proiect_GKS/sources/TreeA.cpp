@@ -23,7 +23,7 @@ void TreeA::setup()
 
 void TreeA::buildFirstLevel(const float* xCoord, const float& y, const float* zCoord)
 {
-	vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[2], y, zCoord[2] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[2], y, zCoord[2] }, rotation, scale, MATERIAL_TYPE::LOG));
 }
 
 void TreeA::buildSecondLevel(const float* xCoord, const float& y, const float* zCoord)
@@ -39,7 +39,7 @@ void TreeA::buildThirdLevel(const float* xCoord, const float& y, const float* zC
 				continue;
 			vertices.push_back(Object(&minecraft.leaves, shader, { xCoord[i], y, zCoord[j] }, rotation, scale));
 		}
-	vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[2], y, zCoord[2] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[2], y, zCoord[2] }, rotation, scale, MATERIAL_TYPE::LOG));
 }
 
 
@@ -50,7 +50,7 @@ void TreeA::buildFourthLevel(const float* xCoord, const float& y, const float* z
 				continue;
 			vertices.push_back(Object(&minecraft.leaves, shader, { xCoord[i], y, zCoord[j] }, rotation, scale));
 		}
-	vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[2], y, zCoord[2] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[2], y, zCoord[2] }, rotation, scale, MATERIAL_TYPE::LOG));
 }
 
 void TreeA::buildFifthLevel(const float* xCoord, const float& y, const float* zCoord)
@@ -70,7 +70,7 @@ void TreeA::buildSeventhLevel(const float* xCoord, const float& y, const float* 
 	vertices.push_back(Object(&minecraft.leaves, shader, { xCoord[2], y, zCoord[3] }, rotation, scale));
 	vertices.push_back(Object(&minecraft.leaves, shader, { xCoord[3], y, zCoord[2] }, rotation, scale));
 
-	vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[2], y, zCoord[2] }, rotation, scale));
+	vertices.push_back(Object(&minecraft.spruceLog, shader, { xCoord[2], y, zCoord[2] }, rotation, scale, MATERIAL_TYPE::LOG));
 }
 
 void TreeA::buildEigthLevel(const float* xCoord, const float& y, const float* zCoord)
