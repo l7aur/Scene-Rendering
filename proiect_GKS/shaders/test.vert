@@ -17,5 +17,5 @@ void main()
 	gl_Position = projection * view * model * vec4(vPosition, 1.0);
 	fTexCoords = vTexCoords;
 	fNormal = mat3(transpose(inverse(model))) * vNormal;
-	fPosition = (model * vec4(vPosition, 1.0)).xyz;
+	fPosition = (view * model * vec4(vPosition, 1.0)).xyz;
 }
