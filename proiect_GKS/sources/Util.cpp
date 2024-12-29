@@ -30,6 +30,7 @@ void Util::initShader(gps::Shader& shader, const char* vertexShaderPath, const c
 void Util::buildScene(gps::Shader& shader)
 {
 	myScene.insertIntoScene(Object(&otherModels.grass, shader));
+	myScene.insertIntoScene(Object(&minecraft.torch, shader, { 0.0f, 1.0f, -5.0f }, MATERIAL_TYPE::GLASS));
 	const float dx = std::abs(Displacement::X);
 	const float dz = std::abs(Displacement::Z);
 

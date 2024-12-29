@@ -16,9 +16,12 @@
 #include <sstream>
 #include <iostream>
 
+#include "../CommonValues.hpp"
+#include "DirectionalLight.hpp"
+#include "PointLight.hpp"
 
 namespace gps {
-    
+
     class Shader {
 
     public:
@@ -27,41 +30,78 @@ namespace gps {
         void useShaderProgram();
 
         GLuint getModelLocUniform() const { return this->uniformModelLoc; };
-        GLuint getViewLocUniform() const { return this->uniformViewLoc; };
-        GLuint getProjectionLocUniform() const { return this->uniformProjectionLoc; };
-        GLuint getNormalMatrixLocUniform() const { return this->uniformNormalMatrixLoc; };
-        GLuint getAmbientIntensityUniform() const { return this->uniformAmbientIntensityLoc; };
-        GLuint getAmbientColourUniform() const { return this->uniformAmbientColourLoc; };
-        GLuint getDiffuseIntensityUniform() const { return this->uniformDiffuseIntensityLoc; };
-        GLuint getDirectionUniform() const { return this->direction; };
-        GLuint getEyePositionUniform() const { return this->uniformEyePosition; };
-        GLuint getSpecularIntensityUniform() const { return this->uniformSpecularIntensity; };
-        GLuint getSpecularShininessUniform() const { return this->uniformSpecularShininess; };
-
         void setModelLocUniform(GLuint loc) { this->uniformModelLoc = loc; };
+
+        GLuint getViewLocUniform() const { return this->uniformViewLoc; };
         void setViewLocUniform(GLuint loc) { this->uniformViewLoc = loc; };
+        
+        GLuint getProjectionLocUniform() const { return this->uniformProjectionLoc; };
         void setProjectionLocUniform(GLuint loc) { this->uniformProjectionLoc = loc; };
+        
+        GLuint getNormalMatrixLocUniform() const { return this->uniformNormalMatrixLoc; };
         void setNormalMatrixLocUniform(GLuint loc) { this->uniformNormalMatrixLoc = loc; };
-        void setAmbientIntensityUniform(GLuint loc) { this->uniformAmbientIntensityLoc = loc; };
-        void setAmbientColourUniform(GLuint loc) { this->uniformAmbientColourLoc = loc; };
-        void setDiffuseIntensityUniform(GLuint loc) { this->uniformDiffuseIntensityLoc = loc; };
-        void setDirectionUniform(GLuint loc) { this->direction = loc; };
+ 
+        GLuint getEyePositionUniform() const { return this->uniformEyePosition; };
         void setEyePositionUniform(GLuint loc) { this->uniformEyePosition = loc; };
+        
+        GLuint getSpecularIntensityUniform() const { return this->uniformSpecularIntensity; };
         void setSpecularIntensityUniform(GLuint loc) { this->uniformSpecularIntensity = loc; };
+        
+        GLuint getSpecularShininessUniform() const { return this->uniformSpecularShininess; };
         void setSpecularShininessUniform(GLuint loc) { this->uniformSpecularShininess = loc; };
 
+        /*Directional lights*/
+        void setDirectionalLight(DirectionalLight * light);
+        GLuint getDirectionalLDirectionUniform() const { return this->uniformDirectionalLight.direction; };
+        void setDirectionalLDirectionUniform(GLuint loc) { this->uniformDirectionalLight.direction = loc; };
+        GLuint getDirectionalLDiffuseIntensityUniform() const { return this->uniformDirectionalLight.diffuseIntensityLoc; };
+        void setDirectionalLDiffuseIntensityUniform(GLuint loc) { this->uniformDirectionalLight.diffuseIntensityLoc = loc; };
+        GLuint getDirectionalLAmbientIntensityUniform() const { return this->uniformDirectionalLight.ambientIntensityLoc; };
+        void setDirectionalLAmbientIntensityUniform(GLuint loc) { this->uniformDirectionalLight.ambientIntensityLoc = loc; };
+        GLuint getDirectionalLAmbientColourUniform() const { return this->uniformDirectionalLight.ambientColourLoc; };
+        void setDirectionalLAmbientColourUniform(GLuint loc) { this->uniformDirectionalLight.ambientColourLoc = loc; };
+
+        /*Point lights*/
+        void setPointLights(PointLight* lights, unsigned int count);
+        GLuint getPointLDiffuseIntensityUniform(int index) const { return this->uniformPointLights[index].diffuseIntensityLoc; };
+        void setPointLDiffuseIntensityUniform(int index, GLuint loc) { this->uniformPointLights[index].diffuseIntensityLoc = loc; };
+        GLuint getPointLAmbientIntensityUniform(int index) const { return this->uniformPointLights[index].ambientIntensityLoc; };
+        void setPointLAmbientIntensityUniform(int index, GLuint loc) { this->uniformPointLights[index].ambientIntensityLoc = loc; };
+        GLuint getPointLAmbientColourUniform(int index) const { return this->uniformPointLights[index].ambientColourLoc; };
+        void setPointLAmbientColourUniform(int index, GLuint loc) { this->uniformPointLights[index].ambientColourLoc = loc; };
+        GLuint getPointLLightPositionUniform(int index) const { return this->uniformPointLights[index].position; };
+        void setPointLLightPositionUniform(int index, GLuint loc) { this->uniformPointLights[index].position = loc; };
+        GLuint getPointLDimmingCoefficientsUniform(int index) const { return this->uniformPointLights[index].dimmingCoefficients; };
+        void setPointLDimmingCoefficientsUniform(int index, GLuint loc) { this->uniformPointLights[index].dimmingCoefficients = loc; };
+        GLuint getPointLightCountUniform() const { return this->pointLightCount; };
+        void setPointLightCountUniform(GLuint loc) { this->pointLightCount = loc; };
+
     private:
+        struct {
+            GLuint ambientIntensityLoc{};
+            GLuint ambientColourLoc{};
+            GLuint diffuseIntensityLoc{};
+
+            GLuint direction{};
+        } uniformDirectionalLight;
+        struct {
+            GLuint ambientIntensityLoc{};
+            GLuint ambientColourLoc{};
+            GLuint diffuseIntensityLoc{};
+
+            GLuint position{};
+            GLuint dimmingCoefficients{};
+        } uniformPointLights[MAX_NUMBER_OF_POINT_LIGHTS];
+
         GLuint uniformModelLoc{};
         GLuint uniformViewLoc{};
         GLuint uniformProjectionLoc{};
         GLuint uniformNormalMatrixLoc{};
-        GLuint uniformAmbientIntensityLoc{};
-        GLuint uniformAmbientColourLoc{};
-        GLuint uniformDiffuseIntensityLoc{};
-        GLuint direction{};
         GLuint uniformEyePosition{};
         GLuint uniformSpecularIntensity{};
         GLuint uniformSpecularShininess{};
+        GLuint uniformPointLightCount{};
+        GLuint pointLightCount;
 
         void initUniforms();
         std::string readShaderFile(std::string fileName);

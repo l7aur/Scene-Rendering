@@ -23,12 +23,14 @@
     <ClCompile Include="sources\BigHouseA.cpp" />
     <ClCompile Include="sources\Camera.cpp" />
     <ClCompile Include="sources\Church.cpp" />
+    <ClCompile Include="sources\DirectionalLight.cpp" />
     <ClCompile Include="sources\Library.cpp" />
     <ClCompile Include="sources\Light.cpp" />
     <ClCompile Include="sources\Material.cpp" />
     <ClCompile Include="sources\Mesh.cpp" />
     <ClCompile Include="sources\MinecraftBuilding.cpp" />
     <ClCompile Include="sources\Model3D.cpp" />
+    <ClCompile Include="sources\PointLight.cpp" />
     <ClCompile Include="sources\SceneRenderer.cpp" />
     <ClCompile Include="sources\Shader.cpp" />
     <ClCompile Include="sources\SmallHouseA.cpp" />
@@ -41,16 +43,20 @@
     <ClCompile Include="sources\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CommonValues.hpp" />
     <ClInclude Include="headers\BigHouseA.hpp" />
     <ClInclude Include="headers\Camera.hpp" />
     <ClInclude Include="headers\Church.hpp" />
+    <ClInclude Include="headers\DirectionalLight.hpp" />
     <ClInclude Include="headers\Library.hpp" />
+    <ClInclude Include="headers\Light.hpp" />
     <ClInclude Include="headers\Material.hpp" />
     <ClInclude Include="headers\Mesh.hpp" />
     <ClInclude Include="headers\MinecraftBuilding.hpp" />
     <ClInclude Include="headers\Model3D.hpp" />
     <ClInclude Include="headers\ModelContainer.hpp" />
     <ClInclude Include="headers\Object.hpp" />
+    <ClInclude Include="headers\PointLight.hpp" />
     <ClInclude Include="headers\SceneRenderer.hpp" />
     <ClInclude Include="headers\Shader.hpp" />
     <ClInclude Include="headers\SmallHouseA.hpp" />
@@ -61,7 +67,6 @@
     <ClInclude Include="headers\Util.hpp" />
     <ClInclude Include="headers\Well.hpp" />
     <ClInclude Include="headers\Window.h" />
-    <ClInclude Include="Light.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\basic.frag" />

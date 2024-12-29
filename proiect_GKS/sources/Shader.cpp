@@ -103,16 +103,47 @@ namespace gps {
         setViewLocUniform(glGetUniformLocation(shaderProgram, "view"));
         setNormalMatrixLocUniform(glGetUniformLocation(shaderProgram, "normalMatrix"));
         setProjectionLocUniform(glGetUniformLocation(shaderProgram, "projection"));
-
-        setAmbientColourUniform(glGetUniformLocation(shaderProgram, "directionalLight.colour"));
-        setAmbientIntensityUniform(glGetUniformLocation(shaderProgram, "directionalLight.ambientIntensity"));
-
-        setDiffuseIntensityUniform(glGetUniformLocation(shaderProgram, "directionalLight.diffuseIntensity"));
-        setDirectionUniform(glGetUniformLocation(shaderProgram, "directionalLight.direction"));
-
+        
         setEyePositionUniform(glGetUniformLocation(shaderProgram, "eyePosition"));
         setSpecularIntensityUniform(glGetUniformLocation(shaderProgram, "material.specularIntensity"));
         setSpecularShininessUniform(glGetUniformLocation(shaderProgram, "material.shininess"));
+
+        setDirectionalLAmbientColourUniform(glGetUniformLocation(shaderProgram, "directionalLight.base.colour"));
+        setDirectionalLAmbientIntensityUniform(glGetUniformLocation(shaderProgram, "directionalLight.base.ambientIntensity"));
+        setDirectionalLDiffuseIntensityUniform(glGetUniformLocation(shaderProgram, "directionalLight.base.diffuseIntensity"));
+        setDirectionalLDirectionUniform(glGetUniformLocation(shaderProgram, "directionalLight.direction"));
+        
+        setPointLightCountUniform(glGetUniformLocation(shaderProgram, "pointLightCount"));
+        for (int i = 0; i < MAX_NUMBER_OF_POINT_LIGHTS; i++) {
+            char locBuff[100] = { '\0' };
+            snprintf(locBuff, sizeof(locBuff), "pointLights[%i].base.colour", i);
+            setPointLAmbientColourUniform(i, glGetUniformLocation(shaderProgram, locBuff));
+            snprintf(locBuff, sizeof(locBuff), "pointLights[%i].base.ambientIntensity", i);
+            setPointLAmbientIntensityUniform(i, glGetUniformLocation(shaderProgram, locBuff));
+            snprintf(locBuff, sizeof(locBuff), "pointLights[%i].base.diffuseIntensity", i);
+            setPointLDiffuseIntensityUniform(i, glGetUniformLocation(shaderProgram, locBuff));
+
+            snprintf(locBuff, sizeof(locBuff), "pointLights[%i].position", i);
+            setPointLLightPositionUniform(i, glGetUniformLocation(shaderProgram, locBuff));
+            snprintf(locBuff, sizeof(locBuff), "pointLights[%i].dimmingCoeffs", i);
+            setPointLDimmingCoefficientsUniform(i, glGetUniformLocation(shaderProgram, locBuff));
+        }
     }
 
+    void Shader::setDirectionalLight(DirectionalLight* light)
+    {
+        light->useLight(getDirectionalLAmbientIntensityUniform(), getDirectionalLAmbientColourUniform(),
+            getDirectionalLDirectionUniform(), getDirectionalLDiffuseIntensityUniform());
+    }
+    void Shader::setPointLights(PointLight* lights, unsigned int count)
+    {
+     
+        if (count > MAX_NUMBER_OF_POINT_LIGHTS)
+            count = MAX_NUMBER_OF_POINT_LIGHTS;
+        glUniform1i(getPointLightCountUniform(), count);
+        for (int i = 0; i < count; i++) {
+            lights[i].useLight(getPointLAmbientIntensityUniform(i), getPointLAmbientColourUniform(i),
+                getPointLLightPositionUniform(i), getPointLDiffuseIntensityUniform(i), getPointLDimmingCoefficientsUniform(i));
+        }
+    }
 }

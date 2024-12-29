@@ -1,5 +1,6 @@
 #include "./headers/Util.hpp"
-#include "./headers/Light.hpp"
+#include "./headers/DirectionalLight.hpp"
+#include "./CommonValues.hpp"
 
 GLfloat angle{ 0.0f };
 float currentFrameTime{ 0.0f };
@@ -10,44 +11,58 @@ ModelContainer::Others otherModels;
 ModelContainer::Minecraft minecraft;
 bool automatedTourStarted{ false };
 
-Light mainLight;
-
 int main(int argc, const char* argv[]) {
-	mainLight = Light(glm::vec3{ 1.0f, 1.0f, 1.0f }, 0.01f, glm::vec3{ 1.0f, -1.0f, 0.0f }, 0.01f);
+	/*Shader*/
+	gps::Shader myBasicShader{};
+	Util::initShader(myBasicShader, "shaders/test.vert", "shaders/test.frag");
 
+	/*Main lighting*/
+	DirectionalLight mainLight = DirectionalLight(glm::vec3{ 1.0f, 1.0f, 1.0f }, 0.01f, glm::vec3{ 1.0f, -1.0f, 0.0f }, 0.01f);
+	
+	/*Point lighting*/
+	int pointLightsCount = 0;
+	PointLight pointLights[] = {
+		pointLights[pointLightsCount++] = PointLight({ 1.0f, 1.0f, 1.0f }, 1.0f, {0.0f, 1.0f, -5.0f}, 0.8f, PointLight::LIGHT_RANGE::RANGE_13),
+		pointLights[pointLightsCount++] = PointLight({ 1.0f, 0.0f, 0.0f }, 1.0f, {10.0f, 4.0f, 0.0f}, 0.8f, PointLight::LIGHT_RANGE::RANGE_13)
+	};
+	/*Automated tour*/
 	Util::Tour myAutomatedTour{};
 	std::vector<std::pair<char, int>>::const_iterator tourIt = myAutomatedTour.directions.begin();
 	int howManyTimes = (*tourIt).second;
 
-	gps::Shader myBasicShader{};
-	//Util::initShader(myBasicShader, "shaders/basic.vert", "shaders/basic.frag");
-	Util::initShader(myBasicShader, "shaders/test.vert", "shaders/test.frag");
-
+	/*Callbacks*/
 	myScene.setWindowCallbacks(
 		Util::windowResizeCallback, Util::keyboardCallback, 
 		Util::mouseCallback, Util::scrollCallback);
 	
+	/*Create scene*/
 	Util::buildScene(myBasicShader);
 
-	myScene.insertIntoScene(Object(&minecraft.torch, myBasicShader, { 0.0f, 1.0f, -5.0f }));
-
+	/*Separate for transparency sorting*/
 	std::vector<Object>::iterator transparentBlocksStart =  Util::separateTransparents();
 
 	Util::glCheckError();
 	while (!glfwWindowShouldClose(myScene.getMyWindow().getWindow())) {
+		/*Clear scene*/
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
+		/*Compute delta time*/
 		currentFrameTime = static_cast<float>(glfwGetTime());
 		deltaTime = currentFrameTime - previousFrameTime;
 
+		/*Update shader*/
 		myScene.updateShaderMatrices(myBasicShader);
 		
-		mainLight.useLight(myBasicShader.getAmbientIntensityUniform(), myBasicShader.getAmbientColourUniform(),
-			myBasicShader.getDirectionUniform(), myBasicShader.getDiffuseIntensityUniform());
-
+		/*Use lighting*/
+		myBasicShader.setDirectionalLight(&mainLight);
+		myBasicShader.setPointLights(pointLights, pointLightsCount);
+		
+		
+		/*Sort for transparency*/
 		Util::sortBlocks(transparentBlocksStart, myScene.getMyCamera()->getCameraFrontDir());
 
+		/*Render*/
 		myScene.renderObjects();
 		
 		/*if (automatedTourStarted) {
@@ -82,9 +97,13 @@ int main(int argc, const char* argv[]) {
 				howManyTimes--;
 		}
 		else*/
+			/*Handle input events*/
 			glfwPollEvents();
+
+		/*Update delta time past frame time*/
 		previousFrameTime = currentFrameTime;
 
+		/*Display scene*/
 		glfwSwapBuffers(myScene.getMyWindow().getWindow());
 		Util::glCheckError();
 	}

@@ -4,17 +4,13 @@
 #include <GL/glew.h>
 
 class Light {
-public:
+protected:
 	Light();
-	Light(glm::vec3 colour, GLfloat ambientI, glm::vec3 dir, GLfloat diffuseI);
+	Light(glm::vec3 colour, GLfloat ambientI, GLfloat diffuseI);
 	~Light();
 	void useLight(GLuint ambienIntensityLocation, GLuint ambientColorLocation,
-		GLuint directionLocation, GLuint diffuseIntensityLocation);
-private:
-
+		GLuint diffuseIntensityLocation);
 	glm::vec3 ambientColour;
 	GLfloat ambientIntensity;
-
-	glm::vec3 direction;
 	GLfloat diffuseIntensity;
 };
