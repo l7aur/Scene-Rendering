@@ -8,7 +8,8 @@ enum MATERIAL_TYPE {
     LOG,
     STONE,
     GLASS,
-    WATER
+    WATER,
+    LIGHT
 };
 
 class Material {

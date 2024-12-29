@@ -27,10 +27,10 @@ void Util::initShader(gps::Shader& shader, const char* vertexShaderPath, const c
 	shader.loadShader(vertexShaderPath, fragmentShaderPath);
 }
 
-void Util::buildScene(gps::Shader& shader)
+void Util::buildScene(gps::Shader& shader, PointLight * pointLights, int& pointLightsCount)
 {
+	/*Objects without lighting*/
 	myScene.insertIntoScene(Object(&otherModels.grass, shader));
-	myScene.insertIntoScene(Object(&minecraft.torch, shader, { 0.0f, 1.0f, -5.0f }, MATERIAL_TYPE::GLASS));
 	const float dx = std::abs(Displacement::X);
 	const float dz = std::abs(Displacement::Z);
 
@@ -83,6 +83,33 @@ void Util::buildScene(gps::Shader& shader)
 	myScene.insertIntoScene(smallHA3.getVertices());
 
 	myScene.insertIntoScene(library1.getVertices());
+
+	/*Objects with lighing*/
+	addLightPole(shader, pointLights, pointLightsCount, glm::vec3{ 4.0f, buildingStartingHeight, -5.0f });
+	addLightPole(shader, pointLights, pointLightsCount, glm::vec3{ 24.0f, buildingStartingHeight, -30.0f });
+	addLightPole(shader, pointLights, pointLightsCount, glm::vec3{ 24.0f, buildingStartingHeight, 20.0f });
+	addLightPole(shader, pointLights, pointLightsCount, glm::vec3{ -22.0f, buildingStartingHeight, -25.0f });
+	addLightPole(shader, pointLights, pointLightsCount, glm::vec3{ 50.0f, buildingStartingHeight, 5.0f });
+	addLightPole(shader, pointLights, pointLightsCount, glm::vec3{ -30.0f, buildingStartingHeight, 25.0f });
+	addLightPole(shader, pointLights, pointLightsCount, glm::vec3{ 65.0f, buildingStartingHeight, -20.0f });
+	addLightPole(shader, pointLights, pointLightsCount, glm::vec3{ -10.0f, 20.0f + buildingStartingHeight, -26.0f });
+	addLightPole(shader, pointLights, pointLightsCount, glm::vec3{ 12.0f, buildingStartingHeight, 50.0f });
+	addLightPole(shader, pointLights, pointLightsCount, glm::vec3{ -3.0f, buildingStartingHeight, -32.0f });
+}
+
+void Util::addLightPole(gps::Shader& shader, PointLight* pointLights, int& pointLightsCount, glm::vec3 position) {
+	glm::vec3 rotateXminus90 = glm::vec3{ -90.0f, 0.0f, 0.0f };
+	glm::vec3 scale = glm::vec3{ 0.5f, 0.5f, 0.5f };
+	myScene.insertIntoScene(Object(&minecraft.fencePost, shader, position, rotateXminus90, MATERIAL_TYPE::WOOD));
+	position += glm::vec3{ 0.0f, 2.0f, 0.0f };
+	myScene.insertIntoScene(Object(&minecraft.fencePost, shader, position, rotateXminus90, MATERIAL_TYPE::WOOD));
+	position += glm::vec3{ 0.0f, 2.0f, 0.0f };
+	glm::vec3 oPosition = position + glm::vec3{ 0.0f, 2.0f, 0.0f };
+	glm::vec3 lPosition = oPosition - glm::vec3{ 0.5f, -0.2f, 0.5f };
+	myScene.insertIntoScene(Object(&minecraft.fencePost, shader, position, rotateXminus90, MATERIAL_TYPE::WOOD));
+	myScene.insertIntoScene(Object(&minecraft.torch, shader, oPosition, rotateXminus90, scale, MATERIAL_TYPE::NONE));
+	pointLights[pointLightsCount++] = PointLight({ 1.0f, 1.0f, 1.0f }, 1.0f, lPosition, 0.8f, PointLight::LIGHT_RANGE::RANGE_13);
+
 }
 
 const std::vector<Object>::iterator Util::separateTransparents()

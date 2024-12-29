@@ -21,10 +21,8 @@ int main(int argc, const char* argv[]) {
 	
 	/*Point lighting*/
 	int pointLightsCount = 0;
-	PointLight pointLights[] = {
-		pointLights[pointLightsCount++] = PointLight({ 1.0f, 1.0f, 1.0f }, 1.0f, {0.0f, 1.0f, -5.0f}, 0.8f, PointLight::LIGHT_RANGE::RANGE_13),
-		pointLights[pointLightsCount++] = PointLight({ 1.0f, 0.0f, 0.0f }, 1.0f, {10.0f, 4.0f, 0.0f}, 0.8f, PointLight::LIGHT_RANGE::RANGE_13)
-	};
+	PointLight pointLights[MAX_NUMBER_OF_POINT_LIGHTS];
+
 	/*Automated tour*/
 	Util::Tour myAutomatedTour{};
 	std::vector<std::pair<char, int>>::const_iterator tourIt = myAutomatedTour.directions.begin();
@@ -36,7 +34,7 @@ int main(int argc, const char* argv[]) {
 		Util::mouseCallback, Util::scrollCallback);
 	
 	/*Create scene*/
-	Util::buildScene(myBasicShader);
+	Util::buildScene(myBasicShader, pointLights, pointLightsCount);
 
 	/*Separate for transparency sorting*/
 	std::vector<Object>::iterator transparentBlocksStart =  Util::separateTransparents();

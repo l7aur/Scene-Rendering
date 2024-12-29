@@ -29,7 +29,8 @@ namespace Util {
 	void mouseCallback(GLFWwindow* window, double xPos, double yPos);
 	void scrollCallback(GLFWwindow* window, double xOffset, double yOffset);
 	void initShader(gps::Shader& shader, const char* vertexShaderPath, const char* fragmentShaderPath);
-	void buildScene(gps::Shader& shader);
+	void buildScene(gps::Shader& shader, PointLight* pointLights, int& pointLightsCount);
+	void addLightPole(gps::Shader& shader, PointLight* pointLights, int& pointLightsCount, glm::vec3 oPosition);
 	const std::vector<Object>::iterator separateTransparents();
 	void sortBlocks(const std::vector<Object>::iterator& startingIt, const glm::vec3& frontDirection);
 	GLenum glCheckError_(const char* file, int line);

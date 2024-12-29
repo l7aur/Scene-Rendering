@@ -40,6 +40,8 @@ glm::vec3 PointLight::getCoefficients(LIGHT_RANGE x)
 		return glm::vec3{ 1.0f, 0.07f, 0.017f };
 	case LIGHT_RANGE::RANGE_100:
 		return glm::vec3{ 1.0f, 0.045f, 0.0075f };
+	case LIGHT_RANGE::CUSTOM:
+		return glm::vec3{ 0.3f, 0.2f, 0.1f };
 	default:
 		return glm::vec3{ 1.0f, 0.0f, 0.0f };
 	}

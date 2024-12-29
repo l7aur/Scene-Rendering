@@ -141,7 +141,7 @@ namespace gps {
         if (count > MAX_NUMBER_OF_POINT_LIGHTS)
             count = MAX_NUMBER_OF_POINT_LIGHTS;
         glUniform1i(getPointLightCountUniform(), count);
-        for (int i = 0; i < count; i++) {
+        for (unsigned int i = 0; i < count; i++) {
             lights[i].useLight(getPointLAmbientIntensityUniform(i), getPointLAmbientColourUniform(i),
                 getPointLLightPositionUniform(i), getPointLDiffuseIntensityUniform(i), getPointLDimmingCoefficientsUniform(i));
         }

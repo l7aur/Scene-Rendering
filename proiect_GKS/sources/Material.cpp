@@ -18,6 +18,9 @@ Material::Material(MATERIAL_TYPE type) {
     case WATER:
         specularIntensity = 0.5f; shininess = 1.0f;
         break;
+    case LIGHT:
+        specularIntensity = 1.0f; shininess = 1.0f;
+        break;
     default:
         specularIntensity = 0.0f; shininess = 0.0f;
         break;

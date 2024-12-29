@@ -6,7 +6,7 @@ in vec2 fTexCoords;
 
 out vec4 fColor;
 
-const int MAX_NUMBER_OF_POINT_LIGHTS = 2;
+const int MAX_NUMBER_OF_POINT_LIGHTS = 10;
 
 struct Light{
 	vec3 colour;

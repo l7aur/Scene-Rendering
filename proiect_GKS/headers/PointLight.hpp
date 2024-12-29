@@ -12,7 +12,8 @@ public:
 		RANGE_32,
 		RANGE_50,
 		RANGE_65,
-		RANGE_100
+		RANGE_100,
+		CUSTOM
 	};
 	  
 	PointLight();
