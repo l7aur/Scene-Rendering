@@ -81,6 +81,9 @@
     <ClCompile Include="sources\PointLight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sources\ShadowMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\BigHouseA.hpp">
@@ -155,6 +158,9 @@
     <ClInclude Include="CommonValues.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="headers\ShadowMap.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\basic.frag">
@@ -167,6 +173,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="shaders\test.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\directional_shadow_map.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\directional_shadow_map.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

@@ -5,13 +5,16 @@ Light::Light()
 {
 }
 
-Light::Light(glm::vec3 colour, GLfloat ambientI, GLfloat diffuseI)
+Light::Light(GLint shadowWidth, GLint shadowHeight, glm::vec3 colour, GLfloat ambientI, GLfloat diffuseI)
 	: ambientColour(colour), ambientIntensity(ambientI), diffuseIntensity(diffuseI)
 {
+	shadowMap = new ShadowMap();
+	shadowMap->init(shadowWidth, shadowHeight);
 }
 
 Light::~Light()
 {
+	//delete shadowMap;
 }
 
 void Light::useLight(GLuint ambientIntensityLocation, GLuint ambientColourLocation,

@@ -6,7 +6,7 @@ PointLight::PointLight()
 }
 
 PointLight::PointLight(glm::vec3 colour, GLfloat ambientI, glm::vec3 pos, GLfloat diffuseI, LIGHT_RANGE x)
-	: Light(colour, ambientI, diffuseI), position(pos), dimmingCoefficients(getCoefficients(x))
+	: Light(1024, 1024, colour, ambientI, diffuseI), position(pos), dimmingCoefficients(getCoefficients(x))
 {
 }
 

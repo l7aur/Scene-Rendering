@@ -15,9 +15,11 @@ int main(int argc, const char* argv[]) {
 	/*Shader*/
 	gps::Shader myBasicShader{};
 	Util::initShader(myBasicShader, "shaders/test.vert", "shaders/test.frag");
+	gps::Shader directionalShadowShader{};
+	Util::initShader(directionalShadowShader, "shaders/directional_shadow_map.vert", "shaders/directional_shadow_map.frag");
 
 	/*Main lighting*/
-	DirectionalLight mainLight = DirectionalLight(glm::vec3{ 1.0f, 1.0f, 1.0f }, 0.01f, glm::vec3{ 1.0f, -1.0f, 0.0f }, 0.01f);
+	DirectionalLight mainLight = DirectionalLight(10, 10, glm::vec3{ 1.0f, 1.0f, 1.0f }, 0.01f, glm::vec3{ 1.0f, -1.0f, 0.0f }, 0.01f);
 	
 	/*Point lighting*/
 	int pointLightsCount = 0;

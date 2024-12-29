@@ -99,35 +99,38 @@ namespace gps {
 
     void Shader::initUniforms()
     {
-        setModelLocUniform(glGetUniformLocation(shaderProgram, "model"));
-        setViewLocUniform(glGetUniformLocation(shaderProgram, "view"));
-        setNormalMatrixLocUniform(glGetUniformLocation(shaderProgram, "normalMatrix"));
-        setProjectionLocUniform(glGetUniformLocation(shaderProgram, "projection"));
+        uniformModelLoc = glGetUniformLocation(shaderProgram, "model");
+        uniformViewLoc = glGetUniformLocation(shaderProgram, "view");
+        uniformNormalMatrixLoc = glGetUniformLocation(shaderProgram, "normalMatrix");
+        uniformProjectionLoc = glGetUniformLocation(shaderProgram, "projection");
         
-        setEyePositionUniform(glGetUniformLocation(shaderProgram, "eyePosition"));
-        setSpecularIntensityUniform(glGetUniformLocation(shaderProgram, "material.specularIntensity"));
-        setSpecularShininessUniform(glGetUniformLocation(shaderProgram, "material.shininess"));
+        uniformEyePosition = glGetUniformLocation(shaderProgram, "eyePosition");
+        uniformSpecularIntensity = glGetUniformLocation(shaderProgram, "material.specularIntensity");
+        uniformSpecularShininess = glGetUniformLocation(shaderProgram, "material.shininess");
 
-        setDirectionalLAmbientColourUniform(glGetUniformLocation(shaderProgram, "directionalLight.base.colour"));
-        setDirectionalLAmbientIntensityUniform(glGetUniformLocation(shaderProgram, "directionalLight.base.ambientIntensity"));
-        setDirectionalLDiffuseIntensityUniform(glGetUniformLocation(shaderProgram, "directionalLight.base.diffuseIntensity"));
-        setDirectionalLDirectionUniform(glGetUniformLocation(shaderProgram, "directionalLight.direction"));
+        uniformDirectionalLight.ambientColourLoc = glGetUniformLocation(shaderProgram, "directionalLight.base.colour");
+        uniformDirectionalLight.ambientIntensityLoc = glGetUniformLocation(shaderProgram, "directionalLight.base.ambientIntensity");
+        uniformDirectionalLight.diffuseIntensityLoc = glGetUniformLocation(shaderProgram, "directionalLight.base.diffuseIntensity");
+        uniformDirectionalLight.direction = glGetUniformLocation(shaderProgram, "directionalLight.direction");
         
-        setPointLightCountUniform(glGetUniformLocation(shaderProgram, "pointLightCount"));
+        uniformPointLightCount = glGetUniformLocation(shaderProgram, "pointLightCount");
         for (int i = 0; i < MAX_NUMBER_OF_POINT_LIGHTS; i++) {
             char locBuff[100] = { '\0' };
             snprintf(locBuff, sizeof(locBuff), "pointLights[%i].base.colour", i);
-            setPointLAmbientColourUniform(i, glGetUniformLocation(shaderProgram, locBuff));
+            uniformPointLights[i].ambientColourLoc = glGetUniformLocation(shaderProgram, locBuff);
             snprintf(locBuff, sizeof(locBuff), "pointLights[%i].base.ambientIntensity", i);
-            setPointLAmbientIntensityUniform(i, glGetUniformLocation(shaderProgram, locBuff));
+            uniformPointLights[i].ambientIntensityLoc = glGetUniformLocation(shaderProgram, locBuff);
             snprintf(locBuff, sizeof(locBuff), "pointLights[%i].base.diffuseIntensity", i);
-            setPointLDiffuseIntensityUniform(i, glGetUniformLocation(shaderProgram, locBuff));
+            uniformPointLights[i].diffuseIntensityLoc = glGetUniformLocation(shaderProgram, locBuff);
 
             snprintf(locBuff, sizeof(locBuff), "pointLights[%i].position", i);
-            setPointLLightPositionUniform(i, glGetUniformLocation(shaderProgram, locBuff));
+            uniformPointLights[i].position = glGetUniformLocation(shaderProgram, locBuff);
             snprintf(locBuff, sizeof(locBuff), "pointLights[%i].dimmingCoeffs", i);
-            setPointLDimmingCoefficientsUniform(i, glGetUniformLocation(shaderProgram, locBuff));
+            uniformPointLights[i].dimmingCoefficients = glGetUniformLocation(shaderProgram, locBuff);
         }
+        uniformTexture = glGetUniformLocation(shaderProgram, "diffuseTexture");
+        uniformDirectionalShadowMap = glGetUniformLocation(shaderProgram, "shadowMap");
+        uniformDirectionalLightTransform = glGetUniformBlockIndex(shaderProgram, "directionalLightTransform");
     }
 
     void Shader::setDirectionalLight(DirectionalLight* light)
