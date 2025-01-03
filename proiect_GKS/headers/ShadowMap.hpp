@@ -16,6 +16,6 @@ public:
 protected:
 	GLuint FBO;
 	GLuint shadowMap;
-	GLuint shadowWidth;
-	GLuint shadowHeight;
+	GLuint shadowWidth{};
+	GLuint shadowHeight{};
 };

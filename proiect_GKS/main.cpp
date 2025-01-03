@@ -15,16 +15,16 @@ bool automatedTourStarted{ false };
 
 int main(int argc, const char* argv[]) {
 	/*Shader*/
-	gps::Shader myBasicShader{};
+	gps::Shader mainShader{};
 	gps::Shader directionalShadowShader{};
-	Util::initShader(myBasicShader, "shaders/test.vert", "shaders/test.frag");
+	Util::initShader(mainShader, "shaders/test.vert", "shaders/test.frag");
 	Util::initShader(directionalShadowShader, "shaders/directional_shadow_map.vert", "shaders/directional_shadow_map.frag");
 
 	SnowController snowCtrl{50};
 	snowCtrl.init();
 
 	/*Main lighting*/
-	DirectionalLight mainLight = DirectionalLight(1300, 980, glm::vec3{ 1.0f, 1.0f, 1.0f }, 0.4f, glm::vec3{ 0.0f, -15.0f, -10.0f }, 0.01f);
+	DirectionalLight dirLight = DirectionalLight(1024, 768, glm::vec3{ 1.0f, 1.0f, 1.0f }, 0.4f, glm::vec3{ 0.0f, -15.0f, -10.0f }, 0.1f);
 	
 	/*Point lighting*/
 	int pointLightsCount = 0;
@@ -41,7 +41,7 @@ int main(int argc, const char* argv[]) {
 		Util::mouseCallback, Util::scrollCallback);
 	
 	/*Create scene*/
-	Util::buildScene(myBasicShader, pointLights, pointLightsCount);
+	Util::buildScene(mainShader, pointLights, pointLightsCount);
 
 	/*Separate for transparency sorting*/
 	std::vector<Object>::iterator transparentBlocksStart =  Util::separateTransparents();
@@ -57,30 +57,29 @@ int main(int argc, const char* argv[]) {
 			: glfwPollEvents();
 
 		directionalShadowShader.useShaderProgram();
-		glViewport(0, 0, mainLight.getShadowMap()->getShadowWidth(), mainLight.getShadowMap()->getShadowHeight());
-		mainLight.getShadowMap()->write();
+		glViewport(0, 0, dirLight.getShadowMap()->getShadowWidth(), dirLight.getShadowMap()->getShadowHeight());
+		dirLight.getShadowMap()->write();
 		glClear(GL_DEPTH_BUFFER_BIT);
 		GLuint modelLocation = directionalShadowShader.getModelLocUniform();
-		directionalShadowShader.sendDirectionalLightTransformUniform(mainLight.computeLightTransform());
+		directionalShadowShader.sendDirectionalLightTransformUniform(dirLight.computeLightTransform());
 		myScene.renderShadows(directionalShadowShader, modelLocation);
+
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-		myBasicShader.useShaderProgram();
-		glViewport(0, 0, 1300, 980);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		mainShader.useShaderProgram();
+		glViewport(0, 0, 1024, 768);
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		myBasicShader.setDirectionalLight(&mainLight);
-		myBasicShader.setPointLights(pointLights, pointLightsCount);
-		myBasicShader.sendDirectionalLightTransformUniform(mainLight.computeLightTransform());
-		mainLight.getShadowMap()->read(GL_TEXTURE1);
-		myBasicShader.sendDirectionalShadowMap(1);
-		myBasicShader.sendTextureUniform(0);
-		myScene.updateShaderMatrices(myBasicShader);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		mainShader.setDirectionalLight(&dirLight);
+		mainShader.setPointLights(pointLights, pointLightsCount);
+		mainShader.sendDirectionalLightTransformUniform(dirLight.computeLightTransform());
+		dirLight.getShadowMap()->read(GL_TEXTURE1);
+		mainShader.sendTextureUniform(0);
+		mainShader.sendDirectionalShadowMap(1);
+		myScene.updateShaderMatrices(mainShader);
 
-		/*Render*/
 		myScene.renderObjects();
 
-		/*Display scene*/
 		glfwSwapBuffers(myScene.getMyWindow().getWindow());
 		Util::glCheckError();
 	}

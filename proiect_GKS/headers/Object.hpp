@@ -48,7 +48,6 @@ struct Object {
         mesh->Draw(shader);
     };
     void renderShadows(gps::Shader& sh, GLuint modelLoc) {
-        //sh.useShaderProgram();
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, translation);
         model = glm::rotate(model, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
