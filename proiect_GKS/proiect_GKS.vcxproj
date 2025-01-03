@@ -35,6 +35,7 @@
     <ClCompile Include="sources\Shader.cpp" />
     <ClCompile Include="sources\ShadowMap.cpp" />
     <ClCompile Include="sources\SmallHouseA.cpp" />
+    <ClCompile Include="sources\SnowController.cpp" />
     <ClCompile Include="sources\stb_image.cpp" />
     <ClCompile Include="sources\tiny_obj_loader.cpp" />
     <ClCompile Include="sources\TreeA.cpp" />
@@ -62,6 +63,7 @@
     <ClInclude Include="headers\Shader.hpp" />
     <ClInclude Include="headers\ShadowMap.hpp" />
     <ClInclude Include="headers\SmallHouseA.hpp" />
+    <ClInclude Include="headers\SnowController.hpp" />
     <ClInclude Include="headers\stb_image.h" />
     <ClInclude Include="headers\tiny_obj_loader.h" />
     <ClInclude Include="headers\TreeA.hpp" />
@@ -69,12 +71,15 @@
     <ClInclude Include="headers\Util.hpp" />
     <ClInclude Include="headers\Well.hpp" />
     <ClInclude Include="headers\Window.h" />
+    <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\basic.frag" />
     <None Include="shaders\basic.vert" />
     <None Include="shaders\directional_shadow_map.frag" />
     <None Include="shaders\directional_shadow_map.vert" />
+    <None Include="shaders\snow.frag" />
+    <None Include="shaders\snow.vert" />
     <None Include="shaders\test.frag" />
     <None Include="shaders\test.vert" />
   </ItemGroup>

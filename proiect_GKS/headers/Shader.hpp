@@ -59,9 +59,9 @@ namespace gps {
         GLuint getDirectionalLightTransformUniform() const { return this->uniformDirectionalLightTransform; };
         GLuint getDirectionalShadowMapUniform() const { return this->uniformDirectionalShadowMap; };
 
-        void setDirectionalLightTransformUniform(glm::mat4* lTransform) { glUniformMatrix4fv(uniformDirectionalLightTransform, 1, GL_FALSE, glm::value_ptr(*lTransform)); };
-        void setDirectionalShadowMap(GLuint textureUnit) { glUniform1i(uniformDirectionalShadowMap, textureUnit); };
-        void setTextureUniform(GLuint textureUnit) { glUniform1i(uniformTexture, textureUnit); };
+        void sendDirectionalLightTransformUniform(glm::mat4 lTransform) { glUniformMatrix4fv(uniformDirectionalLightTransform, 1, GL_FALSE, glm::value_ptr(lTransform)); };
+        void sendDirectionalShadowMap(GLuint textureUnit) { glUniform1i(uniformDirectionalShadowMap, textureUnit); };
+        void sendTextureUniform(GLuint textureUnit) { glUniform1i(uniformTexture, textureUnit); };
 
     private:
         struct {

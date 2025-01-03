@@ -9,7 +9,7 @@ DirectionalLight::DirectionalLight()
 DirectionalLight::DirectionalLight(GLint shadowWidth, GLint shadowHeight, glm::vec3 colour, GLfloat ambientI, glm::vec3 dir, GLfloat diffuseI)
 	: Light(shadowWidth, shadowHeight, colour, ambientI, diffuseI), direction(dir)
 {
-	lightProj = glm::ortho(-5.0f, 5.0f, -5.0f, 5.0f, 0.1f, 20.0f);
+	lightProj = glm::ortho(-5.0f, 5.0f, -5.0f, 5.0f, 0.1f, 10.0f);
 }
 
 DirectionalLight::~DirectionalLight()

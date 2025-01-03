@@ -70,6 +70,12 @@ void SceneRenderer::renderObjects()
         i.render(myCamera->getPosition());
 }
 
+void SceneRenderer::renderShadows(gps::Shader& shader, GLuint modelLoc)
+{
+    for (Object& i : myObjects)
+        i.renderShadows(shader, modelLoc);
+}
+
 void SceneRenderer::setWindowCallbacks(
     void (*resizeCallback)(GLFWwindow*, int, int),
     void (*keyboardCallback)(GLFWwindow*, int, int, int, int),

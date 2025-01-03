@@ -30,7 +30,11 @@ void Util::initShader(gps::Shader& shader, const char* vertexShaderPath, const c
 void Util::buildScene(gps::Shader& shader, PointLight * pointLights, int& pointLightsCount)
 {
 	/*Objects without lighting*/
-	myScene.insertIntoScene(Object(&otherModels.grass, shader));
+	myScene.insertIntoScene(Object(&otherModels.grass, shader, MATERIAL_TYPE::WOOD));
+	TreeA treeA(shader, -5, 0);
+	myScene.insertIntoScene(treeA.getVertices());
+
+	return; /*debug*/
 	const float dx = std::abs(Displacement::X);
 	const float dz = std::abs(Displacement::Z);
 
@@ -146,7 +150,7 @@ const std::vector<Object>::iterator Util::separateTransparents()
 	return i;
 }
 
-void Util::sortBlocks(const std::vector<Object>::iterator& startingIt, const glm::vec3& frontDirection)
+void Util::sortBlocksForTransparency(const std::vector<Object>::iterator& startingIt, const glm::vec3& frontDirection)
 {
 	char dominantAxis =
 		(std::abs(frontDirection.x) > std::abs(frontDirection.y) && std::abs(frontDirection.x) > std::abs(frontDirection.z)) ?

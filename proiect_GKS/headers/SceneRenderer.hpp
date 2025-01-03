@@ -25,6 +25,7 @@ public:
 	gps::Camera* getMyCamera() const { return myCamera; };
 	std::vector<Object>& getObjects() { return myObjects; };
 	void renderObjects();
+	void renderShadows(gps::Shader& shader, GLuint modelLoc);
 private:
 	void initOpenGLWindow();
 	void initOpenGLState();	

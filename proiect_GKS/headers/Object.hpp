@@ -31,7 +31,7 @@ struct Object {
     {
     };
     void render(glm::vec3 eyePosition) {
-        shader.useShaderProgram();
+        //shader.useShaderProgram();
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, translation);
         model = glm::rotate(model, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -47,4 +47,15 @@ struct Object {
 
         mesh->Draw(shader);
     };
+    void renderShadows(gps::Shader& sh, GLuint modelLoc) {
+        //sh.useShaderProgram();
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, translation);
+        model = glm::rotate(model, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+        model = glm::scale(model, scale);
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+        mesh->Draw(sh);
+    }
 };

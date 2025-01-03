@@ -43,10 +43,26 @@ uniform int pointLightCount;
 float computeDirectionalShadowFactor(DirectionalLight light) {
 	vec3 projCoords = directionalLightSpacePosition.xyz / directionalLightSpacePosition.w;
 	projCoords = (projCoords * 0.5) + 0.5;
-	float closestDepth = texture(directionalShadowMap, projCoords.xy).r;
 	float currentDepth = projCoords.z;
-	float shadow = currentDepth > closestDepth ? 1.0f : 0.0f;
-	return 1.0f - shadow;
+
+	vec3 normal = normalize(fNormal);
+	vec3 lightDir = normalize(light.direction);
+	float bias = max(0.05 * (1 - dot(normal, lightDir)), 0.05);
+
+	float shadow = 0.0f;
+
+	vec2 texelSize = 1.0f / textureSize(directionalShadowMap, 0);
+	for(int x = -1; x <= 1; x++)
+		for(int y = -1; y <= 1; y++) {
+			float pcfDepth = texture(directionalShadowMap, projCoords.xy + vec2(x, y) * texelSize).r;
+			shadow +=  (currentDepth - bias > pcfDepth) ? 1.0f : 0.0f;
+	}
+	shadow /= 9.0f; //divide by number of pixels used in pcf 
+
+	if(projCoords.z > 1.0f)
+		shadow = 0.0f;
+
+	return shadow;
 }
 
 vec4 computeLightByDirection(Light light, vec3 dir, float shadowFactor) {
@@ -65,7 +81,7 @@ vec4 computeLightByDirection(Light light, vec3 dir, float shadowFactor) {
 			specularColour = vec4(light.colour * material.specularIntensity * specularFactor, 1.0f);
 		}
 	}
-	return ambientColour + shadowFactor * (diffuseColour + specularColour);
+	return ambientColour + (1.0f - shadowFactor) * (diffuseColour + specularColour);
 }
 
 vec4 computeDirectionalLight() {

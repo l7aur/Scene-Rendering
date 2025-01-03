@@ -32,7 +32,7 @@ namespace Util {
 	void buildScene(gps::Shader& shader, PointLight* pointLights, int& pointLightsCount);
 	void addLightPole(gps::Shader& shader, PointLight* pointLights, int& pointLightsCount, glm::vec3 oPosition);
 	const std::vector<Object>::iterator separateTransparents();
-	void sortBlocks(const std::vector<Object>::iterator& startingIt, const glm::vec3& frontDirection);
+	void sortBlocksForTransparency(const std::vector<Object>::iterator& startingIt, const glm::vec3& frontDirection);
 	GLenum glCheckError_(const char* file, int line);
 	#define glCheckError() glCheckError_(__FILE__, __LINE__)
 }

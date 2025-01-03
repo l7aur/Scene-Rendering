@@ -130,7 +130,7 @@ namespace gps {
         }
         uniformTexture = glGetUniformLocation(shaderProgram, "diffuseTexture");
         uniformDirectionalShadowMap = glGetUniformLocation(shaderProgram, "shadowMap");
-        uniformDirectionalLightTransform = glGetUniformBlockIndex(shaderProgram, "directionalLightTransform");
+        uniformDirectionalLightTransform = glGetUniformLocation(shaderProgram, "directionalLightTransform");
     }
 
     void Shader::setDirectionalLight(DirectionalLight* light)
@@ -140,7 +140,6 @@ namespace gps {
     }
     void Shader::setPointLights(PointLight* lights, unsigned int count)
     {
-     
         if (count > MAX_NUMBER_OF_POINT_LIGHTS)
             count = MAX_NUMBER_OF_POINT_LIGHTS;
         glUniform1i(getPointLightCountUniform(), count);
